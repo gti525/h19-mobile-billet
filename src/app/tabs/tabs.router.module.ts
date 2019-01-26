@@ -19,11 +19,11 @@ const routes: Routes = [
         ]        
       },
       {
-        path: 'tab2',
+        path: 'ticket',
         children: [
           {
             path: '',
-            loadChildren: '../tab2/tab2.module#Tab2PageModule'
+            loadChildren: '../ticket/ticket.module#TicketPageModule'
           }
         ]
       },
