@@ -7,12 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TicketPage implements OnInit {
 
-  public myAngularxQrCode: string = null;
+  private QRCodeId: string = null;
+  private seat: string;
+  private date: string;
+  private event: string;
+  private localisation: string;
 
   constructor () {
-    this.myAngularxQrCode = 'Your QR code data string';
+    //TODO: Get data from ticket id
+    this.QRCodeId = 'QRCodeId';
+    this.seat = '3A';
+    this.date = '21 janvier 2019';
+    this.event = 'Cirque du soleil';
+    this.localisation = '5222 rue st-denis' ;
   }
-  
+
   ngOnInit() {
   }
 
