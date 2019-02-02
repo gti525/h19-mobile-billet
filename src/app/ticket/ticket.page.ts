@@ -1,28 +1,28 @@
 import { Component, OnInit } from '@angular/core';
+import {TicketsService} from '../tickets.service';
 
 @Component({
-  selector: 'app-ticket',
-  templateUrl: './ticket.page.html',
-  styleUrls: ['./ticket.page.scss'],
+    selector: 'app-ticket',
+    templateUrl: './ticket.page.html',
+    styleUrls: ['./ticket.page.scss'],
 })
 export class TicketPage implements OnInit {
 
-  private QRCodeId: string = null;
-  private seat: string;
-  private date: string;
-  private event: string;
-  private localisation: string;
+    private QRCodeId: string = null;
+    private seat: string;
+    private date: string;
+    private event: string;
+    private localisation: string;
 
-  constructor () {
-    //TODO: Get data from ticket id
-    this.QRCodeId = 'QRCodeId';
-    this.seat = '3A';
-    this.date = '21 janvier 2019';
-    this.event = 'Cirque du soleil';
-    this.localisation = '5222 rue st-denis' ;
-  }
+    constructor (private ticketsService: TicketsService) { }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+        const {QRCodeId, seat, date, event, localisation} = this.ticketsService.currentTicket;
+        this.QRCodeId = QRCodeId;
+        this.seat = seat;
+        this.date = date;
+        this.event = event;
+        this.localisation = localisation;
+    }
 
 }
