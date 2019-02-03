@@ -6,15 +6,15 @@ const API_URL = environment.apiUrl;
 const API_KEY = environment.apiKey;
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class NewsService {
 
-  currentArticle: any;
+    currentArticle: any;
 
-  constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) { }
 
-  getData() {
-    return this.http.get(`${API_URL}/top-headlines?country=us&apiKey=${API_KEY}`)
-  }
+    getData() {
+        return this.http.get(`${API_URL}/top-headlines?country=us&apiKey=${API_KEY}`)
+    }
 }
