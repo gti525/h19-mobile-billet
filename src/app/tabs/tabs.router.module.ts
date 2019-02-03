@@ -28,17 +28,17 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'tab3',
+        path: 'parametres',
         children: [
           {
             path: '',
-            loadChildren: '../tab3/tab3.module#Tab3PageModule'
+            loadChildren: '../parametres/parametres.module#ParametresPageModule'
           }
         ]
       },
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/tabs/news',
         pathMatch: 'full'
       }
     ]

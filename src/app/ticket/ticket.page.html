@@ -1,30 +1,30 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Ticket</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>Ticket</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content >
-  
-  <ion-card >
 
-    <ion-card-header>
-      <ion-item>
-          <qrcode [qrdata]="QRCodeId" [size]="256" [level]="'M'"></qrcode>
-      </ion-item>        
-    </ion-card-header>
+    <ion-card >
 
-    <ion-card-content>
-      <ion-item>
-        Date<br/>
-        {{date}}<br/><br/>
-        Evenement<br/>
-        {{event}}<br/><br/>
-        Localisation<br/>
-        {{localisation}}
-      </ion-item>
-    </ion-card-content>
+        <ion-card-header>
+            <ion-item>
+                <qrcode [qrdata]="QRCodeId" [size]="256" [level]="'M'"></qrcode>
+            </ion-item>        
+        </ion-card-header>
 
-  </ion-card>
+        <ion-card-content>
+            <ion-item>
+                Date<br/>
+                {{date}}<br/><br/>
+                Evenement<br/>
+                {{event}}<br/><br/>
+                Localisation<br/>
+                {{localisation}}
+            </ion-item>
+        </ion-card-content>
+
+    </ion-card>
 
 </ion-content>
