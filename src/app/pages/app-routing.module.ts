@@ -7,7 +7,10 @@ const routes: Routes = [
     { path: 'news-single', loadChildren: './news-single/news-single.module#NewsSinglePageModule' },
     { path: 'ticket', loadChildren: './ticket/ticket.module#TicketPageModule' },
     { path: 'user-tickets', loadChildren: './user-tickets/user-tickets.module#UserTicketsPageModule' },
-    { path: 'login', loadChildren: './login/login.module#LoginPageModule' }
+    { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
+    { path: 'parametres', loadChildren: './parametres/parametres.module#ParametresPageModule' }
+
+
 
 ];
 @NgModule({
