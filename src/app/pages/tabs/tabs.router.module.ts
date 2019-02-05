@@ -2,19 +2,18 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { TabsPage } from './tabs.page';
-import { NewsPage } from '../news/news.page';
 
 const routes: Routes = [
     {
-        path: 'tabs',
+        path: '',
         component: TabsPage,
         children: [
         {
-            path: 'news',
+            path: 'user-tickets',
             children: [
             {
                 path: '',
-                loadChildren: '../news/news.module#NewsPageModule'
+                loadChildren: '../user-tickets/user-tickets.module#UserTicketsPageModule'
             }
             ]        
         },
@@ -38,16 +37,11 @@ const routes: Routes = [
         },
         {
             path: '',
-            redirectTo: '/tabs/news',
+            redirectTo: 'news',
             pathMatch: 'full'
         }
         ]
-    },
-    {
-        path: '',
-        redirectTo: '/tabs/news',
-        pathMatch: 'full'
-    }
+    }    
 ];
 
 @NgModule({
