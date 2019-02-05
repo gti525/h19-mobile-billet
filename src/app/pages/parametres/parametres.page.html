@@ -7,28 +7,25 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content >
     <div>
         This is where the ad should be
     </div>
 <br/>
 
     <ion-list>
-        <button ion-item 
-                icon-start>
+        <ion-button >
             <ion-icon name="contact"></ion-icon>
             Nom de l'usager
             <p>Courriel de l'usager</p>
-        </button>
-        <button ion-item 
-                icon-start (click)="onGoToHome()">
+        </ion-button>
+        <ion-button (click)="onGoToHome()">
             <ion-icon name="exit"></ion-icon>
             Se déconnecter
-        </button>
-        <button ion-item 
-                icon-start>
+        </ion-button>
+        <ion-button>
             <ion-icon name="remove"></ion-icon>
             Désactiver les publicités
-        </button>
+        </ion-button>
     </ion-list>
 </ion-content>

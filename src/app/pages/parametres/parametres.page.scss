@@ -1,7 +1,13 @@
-p {
-    padding-left: 28px;
-}
-
-ion-icon {
-    color: #17047A;
+:host{
+    p {
+        padding-left: 28px;
+    }
+    
+    ion-icon {
+        color: #17047A;
+    }
+    
+    div {
+        text-align: center;
+    }
 }

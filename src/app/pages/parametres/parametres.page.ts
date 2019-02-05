@@ -13,7 +13,7 @@ export class ParametresPage implements OnInit {
     ngOnInit() {
     }
 
-    go () {
+    onGoToHome() {
         this.router.navigateByUrl('/');
     }
 

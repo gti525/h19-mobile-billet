@@ -1,7 +1,19 @@
+
+$colors: (
+    primary:    #3032AC,
+    secondary:  #6F7379,
+    danger:     #f53d3d,
+    sucess:     #4BB543,
+    light:      #515459,
+    dark:       #66CD00,
+    blue:       blue
+);
+
 app-user-tickets {
-    .toolbar-background {
-        background: #3032AC;
-    }
+
+    
+    background-color: #3032AC;
+
     
     .toolbar-title {
         color: #F5F4FB;
@@ -10,16 +22,6 @@ app-user-tickets {
     ion-title{
         text-align: center
     }
-
-    $colors: (
-    primary:    #3032AC,
-    secondary:  #6F7379,
-    danger:     #f53d3d,
-    sucess:     #4BB543,
-    light:      #515459,
-    dark:       #66CD00,
-    blue:       blue
-    );
 
     ion-button {
         width: 45%;
