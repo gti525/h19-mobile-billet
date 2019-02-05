@@ -18,11 +18,11 @@ const routes: Routes = [
             ]        
         },
         {
-            path: 'ticket',
+            path: 'event',
             children: [
             {
                 path: '',
-                loadChildren: '../ticket/ticket.module#TicketPageModule'
+                loadChildren: '../event/event.module#EventPageModule'
             }
             ]
         },
@@ -37,7 +37,7 @@ const routes: Routes = [
         },
         {
             path: '',
-            redirectTo: 'news',
+            redirectTo: 'user-tickets',
             pathMatch: 'full'
         }
         ]

@@ -17,7 +17,7 @@ export class TicketsService {
     constructor(private http: HttpClient) {
     }
 
-    getUserTicketsData (id) {
-        return this.http.get(`API_Reseau_sociale/${id}`)
+    getUserTicketsData (userId) {
+        return this.http.get(`API_Reseau_sociale/${userId}`)
     }
 }
