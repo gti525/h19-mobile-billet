@@ -8,24 +8,27 @@
 
 
 <ion-content >
-    <div>
-        This is where the ad should be
-    </div>
-<br/>
+    
+    <section>
+        <p>This is where the ad should be</p>
+    </section>
 
-    <ion-list>
-        <ion-button >
-            <ion-icon name="contact"></ion-icon>
-            Nom de l'usager <br/>
-            Courriel de l'usager
-        </ion-button>
-        <ion-button (click)="onGoToHome()">
-            <ion-icon name="exit"></ion-icon>
-            Se déconnecter
-        </ion-button>
-        <ion-button>
-            <ion-icon name="remove"></ion-icon>
-            Désactiver les publicités
-        </ion-button>
+    <ion-list >
+        <ion-item>
+            <ion-icon name="contact" color="primary" ></ion-icon>
+            <h2>Username</h2>            
+        </ion-item>
+
+        <ion-item (click)="clickReturnLogin()">
+            <ion-icon name="exit" color="primary" ></ion-icon>
+            <h2>Se déconnecter</h2>
+        </ion-item>
+
+        <ion-item>
+            <ion-icon name="remove" color="primary" ></ion-icon>
+            <h2>Déseactiver les publicités</h2>
+        </ion-item>
+
     </ion-list>
+
 </ion-content>

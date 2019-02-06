@@ -1,12 +1,19 @@
-
-p {
-    padding-left: 28px;
+.backItem{
+    --background: #F5F0F6;
 }
 
-ion-icon {
-    color: rgb(31, 9, 143);
+ion-content {
+    --background: rgb(229, 228, 238);
 }
 
-div {
+section {
+    border: 2px solid black;
+    padding: 5%;
     text-align: center;
+}
+
+h2 {
+    color: var(--ion-color-primary);
+    font-size: 14pt;
+    margin-left: 8px;
 }

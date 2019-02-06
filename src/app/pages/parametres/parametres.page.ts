@@ -13,7 +13,7 @@ export class ParametresPage implements OnInit {
     ngOnInit() {
     }
 
-    onGoToHome() {
+    clickReturnLogin() {
         this.router.navigateByUrl('/');
     }
 

@@ -23,9 +23,9 @@
         <h2>Ancien billet</h2>
     </ion-item>
 
-    <ion-list class="backItem" *ngFor="let ticket of ticketList" inset="true" >
+    <ion-list *ngFor="let ticket of ticketList" >
         
-        <ion-item>
+        <ion-item >
             <ion-label text-wrap>
                 <ion-text>
                     {{ticket.date}}
