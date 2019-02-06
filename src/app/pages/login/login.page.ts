@@ -11,7 +11,7 @@ export class LoginPage implements OnInit {
     image: String;
 
     constructor(private router: Router) { 
-        this.image = "assets/rocket.jpg";
+        this.image = "assets/logo.png";
     }
 
     ngOnInit() {

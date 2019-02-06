@@ -1,10 +1,15 @@
 <ion-header>
-    <ion-toolbar>
-        <ion-title>Ticket</ion-title>
+    <ion-toolbar color="primary">
+        <ion-title class="toolbar-title">Ticket</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content >
+
+    <ion-button color="primary-contrast" (click)="clickReturn()" >
+        <ion-icon slot="icon-only" name="arrow-round-back" color="primary" ></ion-icon>
+        <h2>Retour aux billets</h2>
+    </ion-button>
 
     <ion-card class="card" >
 

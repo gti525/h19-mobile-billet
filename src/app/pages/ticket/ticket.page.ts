@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TicketsService } from './../../services/tickets.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class TicketPage implements OnInit {
     private event: string;
     private localisation: string;
 
-    constructor (private ticketsService: TicketsService) { }
+    constructor (private ticketsService: TicketsService, private router: Router) { }
 
     ngOnInit() {
         const {QRCodeId, seat, date, event, localisation} = this.ticketsService.currentTicket;
@@ -24,6 +25,10 @@ export class TicketPage implements OnInit {
         this.date = date;
         this.event = event;
         this.localisation = localisation;
+    }
+
+    clickReturn () {
+        this.router.navigateByUrl('/tabs')
     }
 
 }

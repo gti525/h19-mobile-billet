@@ -1,3 +1,8 @@
+.toolbar-title {
+    color: #F5F4FB;
+    text-align: center;
+}
+
 .card {
     border-radius: 25px;
     border: 4px dotted rgb(181, 184, 178);
@@ -9,4 +14,8 @@
 
 .col {
     padding: 0px;
+}
+
+h2 {
+    color: var(--ion-color-primary);
 }

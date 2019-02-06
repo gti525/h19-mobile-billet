@@ -13,34 +13,29 @@
 </ion-header>
 
 <ion-content>
-<section>
-    <p>This is where the ad should be</p>
-</section>
-<ion-list>
-    <ion-item class="backItem">
-        <ion-icon name="arrow-round-back" color="primary" item-left></ion-icon>
-        <h2 item-left>Ancien billet</h2>
+
+    <section>
+        <p>This is where the ad should be</p>
+    </section>
+
+    <ion-item >
+        <ion-icon name="arrow-round-back" color="primary" ></ion-icon>
+        <h2>Ancien billet</h2>
     </ion-item>
-    <ion-item>
-        <p>Lundi 21 janvier</p>
-        <h2>Cirque du soleil</h2>
-        <ion-button item-right (click)="ticketClickHandler()" >1 Billet</ion-button>
-    </ion-item>
-    <ion-item>
-        <p>Lundi 21 janvier</p>
-        <h2>Cirque du soleil</h2>
-        <ion-button item-right (click)="ticketClickHandler()">1 Billet</ion-button>
-    </ion-item>
-    <ion-item>
-        <p>Lundi 21 janvier</p>
-        <h2>Cirque du soleil</h2>
-        <ion-button item-right (click)="ticketClickHandler()">1 Billet</ion-button>
-    </ion-item>
-    <ion-item>
-        <p>Lundi 21 janvier</p>
-        <h2>Cirque du soleil</h2>
-        <ion-button item-right color="primary" (click)="ticketClickHandler()">1 Billet</ion-button>
-    </ion-item>
+
+    <ion-list class="backItem" *ngFor="let ticket of ticketList" inset="true" >
+        
+        <ion-item>
+            <ion-label text-wrap>
+                <ion-text>
+                    {{ticket.date}}
+                </ion-text>
+                <h2>{{ticket.event}}</h2>
+            </ion-label>
+            <ion-button (click)="ticketClickHandler()">
+                1 billet
+            </ion-button>
+        </ion-item>
         
     </ion-list>
 
