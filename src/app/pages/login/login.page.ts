@@ -8,7 +8,11 @@ import { Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
 
-    constructor(private router: Router) { }
+    image: String;
+
+    constructor(private router: Router) { 
+        this.image = "assets/rocket.jpg";
+    }
 
     ngOnInit() {
     }

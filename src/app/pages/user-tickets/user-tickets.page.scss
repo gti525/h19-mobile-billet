@@ -1,55 +1,48 @@
 
-$colors: (
-    primary:    #3032AC,
-    secondary:  #6F7379,
-    danger:     #f53d3d,
-    sucess:     #4BB543,
-    light:      #515459,
-    dark:       #66CD00,
-    blue:       blue
-);
+// $colors: (
+//     primary:    #3032AC,
+//     secondary:  #6F7379,
+//     danger:     #f53d3d,
+//     sucess:     #4BB543,
+//     light:      #515459,
+//     dark:       #66CD00,
+//     blue:       blue
+// );
 
-app-user-tickets {
-
+.header {
+    --ion-header-background: var(--ion-color-primary);
+}
     
-    background-color: #3032AC;
+.toolbar-title {
+    color: #F5F4FB;
+}
 
-    
-    .toolbar-title {
-        color: #F5F4FB;
-    }
+ion-title{
+    text-align: center;
+}
 
-    ion-title{
-        text-align: center
-    }
+ion-button {
+    width: 45%;
+}
 
-    ion-button {
-        width: 45%;
-    }
+section {
+    --background: darkgrey;
+    border: 2px solid black;
+    padding: 5%;
+}
 
-    section {
-        background: darkgrey;
-        border: 2px solid black;
-        padding: 5%;
-    }
+section p {
+    text-align: center;
+}
 
-    section p {
-        text-align: center
-    }
+.backItem{
+    --background: #F5F0F6;
+}
 
-    .backItem{
-        background: #F5F0F6;
-    }
+h2 {
+    color: var(--ion-color-primary);
+}
 
-    .backItem ion-icon{
-        color: color($colors, primary)
-    }
-
-    h2 {
-        color: color($colors, primary);
-    }
-
-    .content-md {
-        background: #F5F0F6;
-    }
+.content-md {
+    --background: #F5F0F6;
 }

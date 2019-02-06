@@ -1,10 +1,10 @@
 
 ion-content {
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#292cac+0,3db4c9+100 */
-    background-color: #292cac; /* Old browsers */
-    background: -moz-linear-gradient(top, #292cac 0%, #3db4c9 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, #292cac 0%,#3db4c9 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, #292cac 0%,#3db4c9 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    --background: #292cac; /* Old browsers */
+    --background: -moz-linear-gradient(top, #292cac 0%, #3db4c9 100%); /* FF3.6-15 */
+    --background: -webkit-linear-gradient(top, #292cac 0%,#3db4c9 100%); /* Chrome10-25,Safari5.1-6 */
+    --background: linear-gradient(to bottom, #292cac 0%,#3db4c9 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#292cac', endColorstr='#3db4c9',GradientType=0 ); /* IE6-9 */
     
 }
@@ -12,7 +12,7 @@ ion-content {
 .mainButton {
     width: 90%;
     padding: 15px 20px;
-    background: none;
+    --background: none;
     border: 2px solid white;
     //generer la bordure avec https://border-radius.com/
     //pour avoir le css
@@ -29,19 +29,7 @@ ion-content {
     height: 200px;
     margin: 20% auto 0px auto;
     -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    color: white;
-    //https://codepen.io/noahblon/post/coloring-svgs-in-css-background-images
-    //comment utiliser de la couleur dans un svg
-    //mask: url("../../../assets/imgs/_ionicons_svg_md-film.svg");
-    background-color: white;
-    //https://html-css-js.com/css/generator/transform/
-    //pour la rotation du logo
-    -moz-transform: rotate(40deg);
-    -webkit-transform: rotate(40deg);
-    -o-transform: rotate(40deg);
-    -ms-transform: rotate(40deg);
-    transform: rotate(40deg);
+    -moz-border-radius: 5px;    
 }
 
 .appName {
