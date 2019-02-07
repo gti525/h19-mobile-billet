@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class TicketPage implements OnInit {
 
-    private QRCodeId: string = null;
+    private QRCodeId: string;
     private seat: string;
     private date: string;
     private event: string;
@@ -19,8 +19,8 @@ export class TicketPage implements OnInit {
     constructor (private ticketsService: TicketsService, private router: Router) { }
 
     ngOnInit() {
-        const {QRCodeId, seat, date, event, localisation} = this.ticketsService.currentTicket;
-        this.QRCodeId = QRCodeId;
+        const {id, seat, date, event, localisation} = this.ticketsService.currentTicket;
+        this.QRCodeId = id;
         this.seat = seat;
         this.date = date;
         this.event = event;

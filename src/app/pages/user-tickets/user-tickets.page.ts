@@ -13,9 +13,9 @@ export class UserTicketsPage implements OnInit {
 
     constructor( private ticketService: TicketsService, private router: Router ) { 
         this.ticketList = [
-            { event: "Cirque du Soleil", date: "Lundi 21 janvier" },
-            { event: "Concert Celine Dion", date: "Venredi 14 mars" },
-            { event: "Festival", date: "Jeudi 12 mai" }
+            { event: "Cirque du Soleil", date: "Lundi 21 janvier", seat: "3A", localisation:"Centre Bell", id:"string1" },
+            { event: "Concert Celine Dion", date: "Venredi 14 mars", seat: "3A", localisation:"Centre Bell", id:"string2" },
+            { event: "Festival", date: "Jeudi 12 mai", seat: "3A", localisation:"Centre Bell", id:"string3" }
         ]
     }
 
@@ -24,7 +24,8 @@ export class UserTicketsPage implements OnInit {
         //then update curent ticket in ticketService
     }
 
-    ticketClickHandler () {
+    ticketClickHandler (ticket) {
+        this.ticketService.setCurrentTicket(ticket);
         this.router.navigateByUrl('ticket');
     }
 

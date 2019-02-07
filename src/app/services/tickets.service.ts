@@ -6,15 +6,13 @@ import { HttpClient } from '@angular/common/http';
 })
 export class TicketsService {
 
-    currentTicket = {
-        QRCodeId: "QRCodeId",
-        seat: "seat",
-        date: "date",
-        event: "event",
-        localisation: "localisation"
-    };
+    currentTicket: any;
 
     constructor(private http: HttpClient) {
+    }
+
+    setCurrentTicket (ticket) {
+        this.currentTicket = ticket;
     }
 
     getUserTicketsData (userId) {
