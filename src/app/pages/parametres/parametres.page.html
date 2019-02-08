@@ -1,0 +1,34 @@
+<ion-header>
+
+    <ion-toolbar color="primary">
+        <ion-title style="text-align: center">Paramètres</ion-title>
+    </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content >
+    
+    <section>
+        <p>Espace pour la publicité</p>
+    </section>
+
+    <ion-list >
+        <ion-item>
+            <ion-icon name="contact" color="primary" ></ion-icon>
+            <h2>Nom d'utilisateur</h2>            
+        </ion-item>
+
+        <ion-item (click)="clickReturnLogin()">
+            <ion-icon name="exit" color="primary" ></ion-icon>
+            <h2>Se déconnecter</h2>
+        </ion-item>
+
+        <ion-item>
+            <ion-icon name="remove" color="primary" ></ion-icon>
+            <h2>Désactiver les publicités</h2>
+        </ion-item>
+
+    </ion-list>
+
+</ion-content>

@@ -1,0 +1,43 @@
+
+ion-content {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#292cac+0,3db4c9+100 */
+    --background: #292cac; /* Old browsers */
+    --background: -moz-linear-gradient(top, #292cac 0%, #3db4c9 100%); /* FF3.6-15 */
+    --background: -webkit-linear-gradient(top, #292cac 0%,#3db4c9 100%); /* Chrome10-25,Safari5.1-6 */
+    --background: linear-gradient(to bottom, #292cac 0%,#3db4c9 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#292cac', endColorstr='#3db4c9',GradientType=0 ); /* IE6-9 */
+    
+}
+    
+.mainButton {
+    width: 90%;
+    padding: 15px 20px;
+    --background: none;
+    border: 2px solid white;
+    //generer la bordure avec https://border-radius.com/
+    //pour avoir le css
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    margin: 0px 5%;
+    font-size: 14pt;
+    color: white;
+}
+    
+.mainLogo {
+    size: 100%;
+    margin: 20% auto 0px auto;
+}
+
+.appName {
+    color: white;
+    text-align: center;
+    font-weight: bolder;
+    margin-bottom: 30%;
+}
+
+p {
+    text-align: center;
+}
+
+

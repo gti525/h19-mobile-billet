@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-    { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' },
-    { path: 'news', loadChildren: './news/news.module#NewsPageModule' },
-    { path: 'news-single', loadChildren: './news-single/news-single.module#NewsSinglePageModule' },
-    { path: 'ticket', loadChildren: './ticket/ticket.module#TicketPageModule' },
-    { path: 'parametres', loadChildren: './parametres/parametres.module#ParametresPageModule' }
+    { path: '', loadChildren: './pages/login/login.module#LoginPageModule' },
+    { path: 'user-tickets', loadChildren: './pages/user-tickets/user-tickets.module#UserTicketsPageModule' },
+    { path: 'ticket', loadChildren: './pages/ticket/ticket.module#TicketPageModule' },
+    { path: 'tabs', loadChildren: './pages/tabs/tabs.module#TabsPageModule' },
+    { path: 'parametres', loadChildren: './pages/parametres/parametres.module#ParametresPageModule' },
+    { path: 'event', loadChildren: './pages/event/event.module#EventPageModule' }
 
 ];
 @NgModule({

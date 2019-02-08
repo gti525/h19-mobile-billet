@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { TabsPageRoutingModule } from './tabs.router.module';
-import {NewsPageModule} from '../news/news.module';
+//import {NewsPageModule} from '../news/news.module';
 
 import { TabsPage } from './tabs.page';
 
@@ -15,7 +15,7 @@ import { TabsPage } from './tabs.page';
     CommonModule,
     FormsModule,
     TabsPageRoutingModule,
-    NewsPageModule
+    //NewsPageModule
   ],
   declarations: [TabsPage]
 })

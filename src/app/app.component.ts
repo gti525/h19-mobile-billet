@@ -13,14 +13,15 @@ export class AppComponent {
         private platform: Platform,
         private splashScreen: SplashScreen,
         private statusBar: StatusBar
-    ) {
-    this.initializeApp();
-    } 
+    ) 
+    {
+        this.initializeApp();
+    }
 
     initializeApp() {
         this.platform.ready().then(() => {
-            this.statusBar.styleDefault();
-            this.splashScreen.hide();
+        this.statusBar.styleDefault();
+        this.splashScreen.hide();
         });
     }
 }

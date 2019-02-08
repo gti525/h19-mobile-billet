@@ -1,0 +1,56 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title class="toolbar-title">Ticket</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content >
+
+    <ion-button color="primary-contrast" (click)="clickReturn()" >
+        <ion-icon slot="icon-only" name="arrow-round-back" color="primary" ></ion-icon>
+        <h2>Retour aux billets</h2>
+    </ion-button>
+
+    <ion-card class="card" >
+
+        <ion-card-header>
+            <ion-item>
+                <qrcode [qrdata]="QRCodeId" [size]="256" [level]="'M'"></qrcode>
+            </ion-item>        
+        </ion-card-header>
+
+        <ion-card-content>
+            <ion-grid class="grid">
+                <ion-row>
+                    <ion-col class="col" size="9">
+                        Date
+                    </ion-col>
+                    <ion-col class="col" size="3">
+                        Siège
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col class="col" size="9">
+                        <b>{{date}}</b>
+                    </ion-col>
+                    <ion-col class="col" size="3">
+                        <b>{{seat}}</b>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    Evènement
+                </ion-row>
+                <ion-row>
+                    <b>{{event}}</b>
+                </ion-row>
+                <ion-row>
+                    Localisation
+                </ion-row>
+                <ion-row>
+                    <b>{{localisation}}</b>
+                </ion-row>
+            </ion-grid>
+        </ion-card-content>
+
+    </ion-card>
+</ion-content>
