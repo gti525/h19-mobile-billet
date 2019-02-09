@@ -9,7 +9,6 @@ const routes: Routes = [
     { path: 'parametres', loadChildren: './pages/parametres/parametres.module#ParametresPageModule' },
     { path: 'event', loadChildren: './pages/event/event.module#EventPageModule' }
 
-
 ];
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
