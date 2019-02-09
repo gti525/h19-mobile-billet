@@ -28,7 +28,7 @@ export class TicketPage implements OnInit {
     }
 
     clickReturn () {
-        this.router.navigateByUrl('/tabs')
+        this.router.navigateByUrl('/tabs');
     }
 
 }

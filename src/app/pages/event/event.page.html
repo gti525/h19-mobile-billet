@@ -1,9 +1,28 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>event</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title style="text-align:center">Evènements</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+
+<ion-content>
+
+<section>
+    <p>This is where the ad should be</p>
+</section>
+
+<ion-list *ngFor="let ticket of ticketList">
+  <ion-item>
+    <ion-label text wrap>
+      <ion-text>
+        {{ticket.date}}
+      </ion-text>
+      <h2>{{ticket.event}}</h2>
+  </ion-label>
+      <h4>2 amis participent</h4>
+      <ion-icon name="arrow-dropup" color="primary"></ion-icon> 
+  </ion-item>
+
+</ion-list>
 
 </ion-content>

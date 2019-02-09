@@ -9,19 +9,19 @@ import { Router } from '@angular/router';
 })
 export class UserTicketsPage implements OnInit {
 
-    private ticketList : any;
+    private ticketList: any;
 
-    constructor( private ticketService: TicketsService, private router: Router ) { 
+    constructor( private ticketService: TicketsService, private router: Router ) {
         this.ticketList = [
-            { event: "Cirque du Soleil", date: "Lundi 21 janvier", seat: "3A", localisation:"Centre Bell", id:"string1" },
-            { event: "Concert Celine Dion", date: "Venredi 14 mars", seat: "3A", localisation:"Centre Bell", id:"string2" },
-            { event: "Festival", date: "Jeudi 12 mai", seat: "3A", localisation:"Centre Bell", id:"string3" }
-        ]
+            { event: 'Cirque du Soleil', date: 'Lundi 21 janvier', seat: '3A', localisation: 'Centre Bell', id: 'string1' },
+            { event: 'Concert Celine Dion', date: 'Venredi 14 mars', seat: '3A', localisation: 'Centre Bell', id: 'string2' },
+            { event: 'Festival', date: 'Jeudi 12 mai', seat: '3A', localisation: 'Centre Bell', id: 'string3' }
+        ];
     }
 
     ngOnInit() {
-        //this.ticketService.getUserTicketsData(userId);
-        //then update curent ticket in ticketService
+        /*this.ticketService.getUserTicketsData(userId);
+        /then update curent ticket in ticketService*/
     }
 
     ticketClickHandler (ticket) {
