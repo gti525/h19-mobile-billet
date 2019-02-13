@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TicketsService } from '../../services/tickets.service';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
+import _ from 'lodash';
 
 @Component({
     selector: 'app-user-tickets',
@@ -13,15 +15,20 @@ export class UserTicketsPage implements OnInit {
 
     constructor( private ticketService: TicketsService, private router: Router ) { 
         this.ticketList = [
-            { event: "Cirque du Soleil", date: "Lundi 21 janvier", seat: "3A", localisation:"Centre Bell", id:"string1" },
-            { event: "Concert Celine Dion", date: "Venredi 14 mars", seat: "3A", localisation:"Centre Bell", id:"string2" },
-            { event: "Festival", date: "Jeudi 12 mai", seat: "3A", localisation:"Centre Bell", id:"string3" }
+            { event: "Cirque du Soleil", date: "2019-01-19", seat: "3A", localisation:"Centre Bell", id:"string1" },
+            { event: "Concert Celine Dion", date: "2019-03-14", seat: "3A", localisation:"Centre Bell", id:"string2" },
+            { event: "Festival", date: "2019-05-12", seat: "3A", localisation:"Centre Bell", id:"string3" }
         ]
     }
 
     ngOnInit() {
         //this.ticketService.getUserTicketsData(userId);
         //then update curent ticket in ticketService
+        this.ticketList.map( ticket => {
+            if ( !moment().isBefore(ticket.date) ){
+                _.remove(this.ticketList, t => t.id === ticket.id )
+            }
+        })
     }
 
     ticketClickHandler (ticket) {
