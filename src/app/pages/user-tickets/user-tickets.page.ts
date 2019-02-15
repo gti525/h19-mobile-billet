@@ -15,7 +15,7 @@ export class UserTicketsPage implements OnInit {
 
     constructor( private ticketService: TicketsService, private router: Router ) { 
         this.ticketList = [
-            { event: "Cirque du Soleil", date: "2019-01-19", seat: "3A", localisation:"Centre Bell", id:"string1" },
+            { event: "Cirque du Soleil", date: "2019-02-15", seat: "3A", localisation:"Centre Bell", id:"string1" },
             { event: "Concert Celine Dion", date: "2019-03-14", seat: "3A", localisation:"Centre Bell", id:"string2" },
             { event: "Festival", date: "2019-05-12", seat: "3A", localisation:"Centre Bell", id:"string3" }
         ]
