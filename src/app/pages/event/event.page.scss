@@ -1,0 +1,33 @@
+
+.toolbar-title
+{
+    text-align: center;
+}
+
+ion-content {
+    --background: rgb(229, 228, 238);
+}
+
+h2, h4  
+{
+    color: var(--ion-color-primary);
+}
+
+h4{
+    font-size: 16px; 
+}
+
+section {
+    border: 2px solid black;
+    text-align: center;
+    padding: 5%;
+}
+
+ion-content {
+    --background: rgb(229, 228, 238);
+}
+
+ion-list {
+    margin-bottom: 2px;
+}
+
