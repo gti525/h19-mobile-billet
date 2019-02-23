@@ -17,4 +17,8 @@ export class ParametresPage implements OnInit {
         this.router.navigateByUrl('/');
     }
 
+    removeAdsClickHandler() {
+        console.log("removeAdsClickHandler")
+        this.router.navigateByUrl('paiement');
+    }
 }
