@@ -1,0 +1,36 @@
+section {
+    border: 2px solid black;
+    padding: 5%;
+    text-align: center;
+}
+
+ion-content {
+    --background: rgb(229, 228, 238);
+}
+
+ion-input {
+    background: white;
+    border: 2px solid #D5D5D5;
+}
+
+ion-label {
+    font-size: 14pt;
+    color: var(--ion-color-primary);;
+}
+
+ion-button {
+    text-align: center;
+}
+
+ion-input{
+    margin-bottom: 5px;
+}
+
+form section {
+    border: none;
+    color: var(--ion-color-primary);;
+}
+
+form ion-button{
+    text-transform: initial;
+}
