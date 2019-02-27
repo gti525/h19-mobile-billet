@@ -14,6 +14,6 @@ export class PaiementPage implements OnInit {
   }
 
   clickReturn() {
-    console.log("clickReturn")
+    this.router.navigateByUrl('/tabs/parametres')
   }
 }
