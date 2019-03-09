@@ -14,7 +14,17 @@
     <ion-segment class="appName">
         <h1>Gestion des Billets</h1>
     </ion-segment>
-    <ion-button class="mainButton" (click)="go()" >
+    <ion-item>
+        <ion-icon slot="start" color="medium" name="book"></ion-icon>
+        <ion-label>Email</ion-label>
+	    <ion-input [(ngModel)]="email"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-icon slot="start" color="medium" name="build"></ion-icon>
+        <ion-label>Password</ion-label>
+	    <ion-input type='password' [(ngModel)]="password"></ion-input>
+    </ion-item>
+    <ion-button class="mainButton" (click)="login()" >
         <ion-icon slot="start" name="globe"></ion-icon>
         Connectez-vous avec SocialA
     </ion-button>
