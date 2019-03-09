@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -9,16 +9,17 @@ import { Router } from '@angular/router';
 export class LoginPage implements OnInit {
 
     image: String;
+    email: String;
+    password: String;
 
-    constructor(private router: Router) { 
+    constructor(private loginService: LoginService) { 
         this.image = "assets/logo.png";
     }
 
     ngOnInit() {
     }
-
-    go () {
-        this.router.navigateByUrl('tabs');
+    
+    login(){
+        this.loginService.login(this.email, this.password);
     }
-
 }

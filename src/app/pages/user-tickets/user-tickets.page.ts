@@ -14,6 +14,7 @@ export class UserTicketsPage implements OnInit {
     private ticketList: any;
 
     constructor( private ticketService: TicketsService, private router: Router ) {
+
         this.ticketList = [
             { event: "Cirque du Soleil", date: "2019-02-15", seat: "3A", localisation:"Centre Bell", id:"string1" },
             { event: "Concert Celine Dion", date: "2019-03-14", seat: "3A", localisation:"Centre Bell", id:"ed36a534-3acd-11e9-b210-d663bd873d93" },
@@ -24,11 +25,12 @@ export class UserTicketsPage implements OnInit {
     ngOnInit() {
         //this.ticketService.getUserTicketsData(userId);
         //then update curent ticket in ticketService
+
         this.ticketList.map( ticket => {
             if ( !moment().isBefore(ticket.date) ){
                 _.remove(this.ticketList, t => t.id === ticket.id )
             }
-        })
+        });
     }
 
     ticketClickHandler (ticket) {
