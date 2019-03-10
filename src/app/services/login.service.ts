@@ -30,7 +30,7 @@ export class LoginService {
                     .catch(err => console.log(err));
                 this.router.navigateByUrl('tabs')
             }, error => {
-                console.log('marche pas '+ error);
+                console.log('Adresse Email ou mot de passe invalide'+ error);
                 return false;
             });
     }
