@@ -31,6 +31,9 @@ export class LoginService {
                 this.router.navigateByUrl('tabs')
             }, error => {
                 console.log('Adresse Email ou mot de passe invalide'+ error);
+                this.getUserInfo()
+                            .then(value => console.log(value.Id + " is stored"))
+                            .catch(() => console.log("could not retrieve local storage"))
                 return false;
             });
     }
