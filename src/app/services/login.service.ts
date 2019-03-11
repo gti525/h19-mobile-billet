@@ -16,8 +16,8 @@ export class LoginService {
         this.deleteUserInfo()
 
         this.http.post('https://core-api-525.herokuapp.com/api/client/login', {
-            "email": "AN16720@test.com",
-            "password": "AN16720"
+            "email": username,
+            "password": password
         })
             .subscribe(data => {
                 console.log(data);
@@ -31,6 +31,9 @@ export class LoginService {
                 this.router.navigateByUrl('tabs')
             }, error => {
                 console.log('Adresse Email ou mot de passe invalide'+ error);
+                this.getUserInfo()
+                            .then(value => console.log(value.Id + " is stored"))
+                            .catch(() => console.log("could not retrieve local storage"))
                 return false;
             });
     }
