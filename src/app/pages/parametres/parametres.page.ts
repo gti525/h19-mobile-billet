@@ -8,13 +8,13 @@ import { LoginService } from '../../services/login.service';
     styleUrls: ['./parametres.page.scss'],
 })
 export class ParametresPage implements OnInit {
-    
+
     userName: String
 
     constructor(private router: Router, private loginService: LoginService) { }
 
     ngOnInit() {
-    
+
     }
 
     ngAfterContentInit(){
@@ -37,7 +37,7 @@ export class ParametresPage implements OnInit {
                 this.router.navigateByUrl('/');
             })
 
-        
+
     }
 
     removeAdsClickHandler() {
