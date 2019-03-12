@@ -14,7 +14,7 @@
 
         <ion-card-header>
             <ion-item>
-                <qrcode [qrdata]="QRCodeId" [size]="256" [level]="'M'"></qrcode>
+                <qrcode [qrdata]="UUID" [size]="256" [level]="'M'"></qrcode>
             </ion-item>        
         </ion-card-header>
 
@@ -30,7 +30,7 @@
                 </ion-row>
                 <ion-row>
                     <ion-col class="col" size="9">
-                        <b>{{date}}</b>
+                        <b>{{Date}}</b>
                     </ion-col>
                     <ion-col class="col" size="3">
                         <b>{{seat}}</b>
@@ -40,13 +40,13 @@
                     Evènement
                 </ion-row>
                 <ion-row>
-                    <b>{{event}}</b>
+                    <b>{{EventName}}</b>
                 </ion-row>
                 <ion-row>
                     Localisation
                 </ion-row>
                 <ion-row>
-                    <b>{{localisation}}</b>
+                    <b>{{Location}}</b>
                 </ion-row>
             </ion-grid>
         </ion-card-content>

@@ -9,7 +9,7 @@ import { analyzeAndValidateNgModules } from '@angular/compiler';
 })
 export class LoginService {
     private USER_INFO = "userKey";
-        
+
     constructor(private http: HttpClient, private storage: Storage, private router: Router) { }
 
     login(username, password) {
@@ -21,8 +21,34 @@ export class LoginService {
             "password": password
         })
             .subscribe(data => {
+                //================================= temporaire
+                data["Tickets"] = [
+                    {
+                        "Id": 4,
+                        "UUID": 134705,
+                        "EventName": "ROUGE",
+                        "Artist": "Barbe bleue",
+                        "Date": "2019-02-25T00:00:00",
+                        "Location": "Mtl",
+                        "ClientId": 9,
+                        "Client": null
+                    },
+                    {
+                        "Id": 5,
+                        "UUID": 53025,
+                        "EventName": "TEST2",
+                        "Artist": "1,2,test",
+                        "Date": "2019-02-25T00:00:00",
+                        "Location": "Mtl",
+                        "ClientId": 9,
+                        "Client": null
+                    }
+                ]
+                //=================================
                 let dataToSave = {data, password };
                 this.storage.set(this.USER_INFO, dataToSave)
+                console.log(data);
+                this.storage.set(this.USER_INFO, data)
                     .then(() => {
                         this.getUserInfo()
                             .then(value => console.log(value))
