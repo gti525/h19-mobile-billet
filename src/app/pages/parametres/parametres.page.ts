@@ -20,15 +20,24 @@ export class ParametresPage implements OnInit {
     ngAfterContentInit(){
         this.loginService.getUserInfo().then(
             value => {
-                console.log("set le nom de lutilisateur "+value.FirstName+" "+value.LastName)
-                this.userName = value.FirstName+" "+value.LastName;
+                console.log("set le nom de lutilisateur "+value.data.FirstName+" "+value.data.LastName)
+                this.userName = value.data.FirstName+" "+value.data.LastName;
             }
         )
         .catch(() => console.log("could not retrieve local storage"))
     }
 
     clickReturnLogin() {
-        this.router.navigateByUrl('/');
+        this.loginService.deleteUserInfo()
+            .then(() => {
+                this.router.navigateByUrl('/');
+            })
+            .catch(err => {
+                console.log(err);
+                this.router.navigateByUrl('/');
+            })
+
+        
     }
 
     removeAdsClickHandler() {
