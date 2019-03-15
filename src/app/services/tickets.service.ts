@@ -16,9 +16,4 @@ export class TicketsService {
     setCurrentTicket (ticket) {
         this.currentTicket = ticket;
     }
-
-    getUserTicketsData () {
-        //let token = 
-        this.http.get(`API_Reseau_sociale/${userId}`);
-    }
 }
