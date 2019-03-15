@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { $ } from 'protractor';
+import {LoginService} from './login.service';
 
 @Injectable({
     providedIn: 'root'
@@ -8,19 +8,17 @@ import { $ } from 'protractor';
 export class TicketsService {
 
     currentTicket: any;
+    USER_TICKET = "ticketKey";
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private loginService: LoginService) {
     }
 
     setCurrentTicket (ticket) {
         this.currentTicket = ticket;
     }
 
-    getUserTicketsData (userId) {
-        return this.http.get(`API_Reseau_sociale/${userId}`);
-    }
-
-    getUserTicketData (userId) {
-        return this.http.get(`/api/Ticket/${userId}`);
+    getUserTicketsData () {
+        //let token = 
+        this.http.get(`API_Reseau_sociale/${userId}`);
     }
 }
