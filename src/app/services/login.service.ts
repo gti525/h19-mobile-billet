@@ -14,7 +14,6 @@ export class LoginService {
 
     login(username, password) {
 
-        //this.deleteUserInfo();
         console.log(username + " " + password);
         this.http.post('https://core-api-525.herokuapp.com/api/client/login', {
             "email": username,
@@ -28,7 +27,7 @@ export class LoginService {
                         "UUID": 134705,
                         "EventName": "ROUGE",
                         "Artist": "Barbe bleue",
-                        "Date": "2019-02-25T00:00:00",
+                        "Date": "2019-02-15",
                         "Location": "Mtl",
                         "ClientId": 9,
                         "Client": null
@@ -38,24 +37,34 @@ export class LoginService {
                         "UUID": 53025,
                         "EventName": "TEST2",
                         "Artist": "1,2,test",
-                        "Date": "2019-02-25T00:00:00",
+                        "Date": "2020-03-14",
+                        "Location": "Mtl",
+                        "ClientId": 9,
+                        "Client": null
+                    },
+                    {
+                        "Id": 6,
+                        "UUID": 89700,
+                        "EventName": "LE FEU",
+                        "Artist": "Johnny",
+                        "Date": "2019-04-14",
                         "Location": "Mtl",
                         "ClientId": 9,
                         "Client": null
                     }
                 ]
                 //=================================
+                console.log(data);
                 let dataToSave = {data, password };
                 this.storage.set(this.USER_INFO, dataToSave)
-                console.log(data);
-                this.storage.set(this.USER_INFO, data)
+                
+                //this.storage.set(this.USER_INFO, data)
                     .then(() => {
                         this.getUserInfo()
-                            .then(value => console.log(value))
-                            .catch(() => console.log("could not retrieve local storage"))
+                            .then(value => {console.log(value); this.router.navigateByUrl('tabs');})
+                            .catch(() => console.log("could not retrieve local storage"));
                     })
                     .catch(err => console.log(err));
-                this.router.navigateByUrl('tabs')
             }, error => {
                 console.log('Adresse Email ou mot de passe invalide');
             });
