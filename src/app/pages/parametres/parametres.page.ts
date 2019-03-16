@@ -20,8 +20,8 @@ export class ParametresPage implements OnInit {
     ngAfterContentInit(){
         this.loginService.getUserInfo().then(
             value => {
-                console.log("set le nom de lutilisateur "+value.data.FirstName+" "+value.data.LastName)
-                this.userName = value.data.FirstName+" "+value.data.LastName;
+                console.log("set le nom de lutilisateur "+value.FirstName+" "+value.LastName)
+                this.userName = value.FirstName+" "+value.LastName;
             }
         )
         .catch(() => console.log("could not retrieve local storage"))

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import {LoginService} from './login.service';
+import { Storage } from '@ionic/storage';
 
 @Injectable({
     providedIn: 'root'
@@ -8,9 +7,17 @@ import {LoginService} from './login.service';
 export class TicketsService {
 
     currentTicket: any;
-    USER_TICKET = "ticketKey";
+    TICKET_INFO = "ticketKey";
 
-    constructor(private http: HttpClient, private loginService: LoginService) {
+    constructor( private storage: Storage ) {
+    }
+
+    getTickets () {
+        return this.storage.get(this.TICKET_INFO);
+    }
+  
+    saveTickets (tickets) {
+        return this.storage.set(this.TICKET_INFO, tickets);
     }
 
     setCurrentTicket (ticket) {
