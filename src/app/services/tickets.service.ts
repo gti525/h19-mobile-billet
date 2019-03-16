@@ -15,7 +15,7 @@ export class TicketsService {
     getTickets () {
         return this.storage.get(this.TICKET_INFO);
     }
-
+  
     saveTickets (tickets) {
         return this.storage.set(this.TICKET_INFO, tickets);
     }
