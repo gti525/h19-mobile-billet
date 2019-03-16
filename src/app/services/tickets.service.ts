@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { $ } from 'protractor';
+import { Storage } from '@ionic/storage';
 
 @Injectable({
     providedIn: 'root'
@@ -8,19 +7,20 @@ import { $ } from 'protractor';
 export class TicketsService {
 
     currentTicket: any;
+    TICKET_INFO = "ticketKey";
 
-    constructor(private http: HttpClient) {
+    constructor( private storage: Storage ) {
+    }
+
+    getTickets () {
+        return this.storage.get(this.TICKET_INFO);
+    }
+
+    saveTickets (tickets) {
+        return this.storage.set(this.TICKET_INFO, tickets);
     }
 
     setCurrentTicket (ticket) {
         this.currentTicket = ticket;
-    }
-
-    getUserTicketsData (userId) {
-        return this.http.get(`API_Reseau_sociale/${userId}`);
-    }
-
-    getUserTicketData (userId) {
-        return this.http.get(`/api/Ticket/${userId}`);
     }
 }

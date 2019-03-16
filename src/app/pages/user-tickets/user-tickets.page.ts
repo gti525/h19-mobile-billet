@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import * as moment from 'moment';
 import _ from 'lodash';
 import { LoginService } from '../../services/login.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
     selector: 'app-user-tickets',
@@ -14,25 +15,42 @@ export class UserTicketsPage implements OnInit {
 
     private ticketList: any;
 
-    constructor( private ticketService: TicketsService, private router: Router, private loginService: LoginService ) {
+    constructor( private ticketService: TicketsService, private router: Router, private loginService: LoginService, private http: HttpClient ) {
 
-
-        // this.ticketList = [
-        //     { event: "Cirque du Soleil", date: "2019-02-15", seat: "3A", localisation:"Centre Bell", id:"string1" },
-        //     { event: "Concert Celine Dion", date: "2019-03-14", seat: "3A", localisation:"Centre Bell", id:"ed36a534-3acd-11e9-b210-d663bd873d93" },
-        //     { event: "Festival", date: "2019-05-12", seat: "3A", localisation:"Centre Bell", id:"string3" }
-        // ]
-    }
-
-    ngAfterContentInit(){
-        
     }
 
     ngOnInit() {
-        //this.ticketService.getUserTicketsData(userId);
-        //then update curent ticket in ticketService
-        this.ticketChecker();
-        
+        // make api GET Ticket if there is no ticket in local storage
+        this.ticketService.getTickets()
+            .then(value => { 
+                if (value.length !== 0) {
+                    this.ticketList = value 
+                }
+                else { this.getTickets() }
+            })
+            .catch(() => this.getTickets());
+    }
+
+    getTickets () {
+        this.loginService.getUserInfo()
+            .then(value => {
+                const headers = new HttpHeaders({
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${value.Token}`
+                })
+
+                this.http.get('https://core-api-525.herokuapp.com/api/Ticket', { headers })
+                    .subscribe(data => {
+                        this.ticketChecker(data);
+                        this.ticketService.saveTickets(data)
+                            .then(() => console.log("tickets saved"))
+                            .catch(err => console.log(err));
+                    }, error => {
+                        console.log("could not get ticket");
+                        console.log(error);
+                    })
+            })
+            .catch(err => console.log(err));
     }
 
     ticketClickHandler (ticket) {
@@ -40,19 +58,19 @@ export class UserTicketsPage implements OnInit {
         this.router.navigateByUrl('ticket');
     }
 
-    ticketChecker () {
-        this.loginService.getUserInfo().then(
-            value => {
-                let listTicket = value.data.Tickets;
-                listTicket.map( ticket => {
-                    if ( !moment().isBefore(ticket.Date) ){
-                        _.remove(listTicket, t => t.UUID === ticket.UUID )
-                    }
-                });
-                this.ticketList = listTicket;
+    ticketChecker (tickets) {
+        
+        tickets.map( ticket => {
+            if ( !moment().isBefore(ticket.Date) ){
+                _.remove(tickets, t => t.UUID === ticket.UUID )
             }
-        )
-        .catch(() => console.log("could not retrieve local storage"));
+        });
+
+        this.setTicketList(tickets);
+    }
+
+    setTicketList (ticketList) {
+        this.ticketList = ticketList;
     }
 
 }

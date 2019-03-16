@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
-import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 @Injectable({
     providedIn: 'root'
@@ -21,42 +20,9 @@ export class LoginService {
         })
             .subscribe(data => {
                 //================================= temporaire
-                data["Tickets"] = [
-                    {
-                        "Id": 4,
-                        "UUID": 134705,
-                        "EventName": "ROUGE",
-                        "Artist": "Barbe bleue",
-                        "Date": "2019-02-15",
-                        "Location": "Mtl",
-                        "ClientId": 9,
-                        "Client": null
-                    },
-                    {
-                        "Id": 5,
-                        "UUID": 53025,
-                        "EventName": "TEST2",
-                        "Artist": "1,2,test",
-                        "Date": "2020-03-14",
-                        "Location": "Mtl",
-                        "ClientId": 9,
-                        "Client": null
-                    },
-                    {
-                        "Id": 6,
-                        "UUID": 89700,
-                        "EventName": "LE FEU",
-                        "Artist": "Johnny",
-                        "Date": "2019-04-14",
-                        "Location": "Mtl",
-                        "ClientId": 9,
-                        "Client": null
-                    }
-                ]
-                //=================================
+                data["Password"] = password;
                 console.log(data);
-                let dataToSave = {data, password };
-                this.storage.set(this.USER_INFO, dataToSave)
+                this.storage.set(this.USER_INFO, data)
                 
                 //this.storage.set(this.USER_INFO, data)
                     .then(() => {

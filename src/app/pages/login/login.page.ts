@@ -47,10 +47,9 @@ export class LoginPage implements OnInit {
     }
     
     login(){
-        let info : any;
         this.loginService.getUserInfo()
             .then(info => {
-                this.loginService.login(info.data.Email, info.password);
+                this.loginService.login(info.Email, info.Password);
             })
             .catch(() => {
                 this.presentAlert();
