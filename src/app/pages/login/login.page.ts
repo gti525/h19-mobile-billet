@@ -49,7 +49,7 @@ export class LoginPage implements OnInit {
     login(){
         this.loginService.getUserInfo()
             .then(info => {
-                if ((info.Email === null || info.Email === "" || info.Email === undefined )  && (info.Password === null || info.Password === undefined)) {
+                if (info.Email === null || info.Email === "" || info.Email === undefined || info.Password === null || info.Password === undefined) {
                     this.presentAlert();
                 }
                 else this.loginService.login(info.Email, info.Password)
