@@ -11,11 +11,12 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { QRCodeModule } from 'angularx-qrcode';
 import { IonicStorageModule } from '@ionic/storage';
+import { AdModule } from './module/AdModule';
 
 @NgModule({
     declarations: [AppComponent],
     entryComponents: [],
-    imports: [BrowserModule, IonicModule.forRoot(),IonicStorageModule.forRoot(), AppRoutingModule, HttpClientModule, QRCodeModule],
+    imports: [BrowserModule, IonicModule.forRoot(),IonicStorageModule.forRoot(), AppRoutingModule, HttpClientModule, QRCodeModule, AdModule],
     providers: [
         StatusBar,
         SplashScreen,

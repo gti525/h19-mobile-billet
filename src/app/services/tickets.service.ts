@@ -23,4 +23,8 @@ export class TicketsService {
     setCurrentTicket (ticket) {
         this.currentTicket = ticket;
     }
+
+    deleteTickets () {
+        return this.storage.set(this.TICKET_INFO, null);
+    }
 }
