@@ -19,12 +19,9 @@ export class LoginService {
             "password": password
         })
             .subscribe(data => {
-                //================================= temporaire
                 data["Password"] = password;
                 console.log(data);
                 this.storage.set(this.USER_INFO, data)
-                
-                //this.storage.set(this.USER_INFO, data)
                     .then(() => {
                         this.getUserInfo()
                             .then(value => {console.log(value); this.router.navigateByUrl('tabs');})
