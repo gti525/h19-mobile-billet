@@ -23,37 +23,39 @@ export class UserTicketsPage implements OnInit {
 
     ngOnInit() {
         // make api GET Ticket if there is no ticket in local storage
-        this.ticketService.getTickets()
+        console.log("ticket init")
+        this.loginService.getUserInfo()
             .then(value => { 
-                if (value.length !== 0) {
-                    this.show = true;
-                    this.ticketList = value 
-                }
-                else { this.getTickets() }
+                console.log("ticket "+value.Tickets[0].EventName)
+                this.ticketList = value.Tickets
+                this.ticketChecker(value.Tickets);
+                this.ticketService.saveTickets(value.Tickets)
+                    .then(() => console.log("tickets saved"))
+                    .catch(err => console.log(err));
             })
-            .catch(() => this.getTickets());
     }
 
     getTickets () {
-        this.loginService.getUserInfo()
-            .then(value => {
-                const headers = new HttpHeaders({
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${value.Token}`
-                })
+        // console.log("getTickets")
+        // this.loginService.getUserInfo()
+        //     .then(value => {
+        //         const headers = new HttpHeaders({
+        //             'Content-Type': 'application/json',
+        //             'Authorization': `Bearer ${value.Token}`
+        //         })
 
-                this.http.get('https://core-api-525.herokuapp.com/api/Ticket', { headers })
-                    .subscribe(data => {
-                        this.ticketChecker(data);
-                        this.ticketService.saveTickets(data)
-                            .then(() => console.log("tickets saved"))
-                            .catch(err => console.log(err));
-                    }, error => {
-                        console.log("could not get ticket");
-                        console.log(error);
-                    })
-            })
-            .catch(err => console.log(err));
+        //         this.http.get('https://core-api-525.herokuapp.com/api/Ticket', { headers })
+        //             .subscribe(data => {
+        //                 this.ticketChecker(data);
+        //                 this.ticketService.saveTickets(data)
+        //                     .then(() => console.log("tickets saved"))
+        //                     .catch(err => console.log(err));
+        //             }, error => {
+        //                 console.log("could not get ticket");
+        //                 console.log(error);
+        //             })
+        //     })
+        //     .catch(err => console.log(err));
     }
 
     ticketClickHandler (ticket) {
@@ -62,12 +64,15 @@ export class UserTicketsPage implements OnInit {
     }
 
     ticketChecker (tickets) {
-        
         tickets.map( ticket => {
             if ( !moment().isBefore(ticket.Date) ){
                 _.remove(tickets, t => t.UUID === ticket.UUID )
             }
         });
+
+        if(tickets.length > 0){
+            this.show = true
+        }
 
         this.setTicketList(tickets);
     }
