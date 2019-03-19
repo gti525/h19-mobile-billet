@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { IonicModule } from '@ionic/angular';
 
-import { Ad } from './ad';
+import { Ad } from './Ad';
 
 @NgModule({
   imports: [
