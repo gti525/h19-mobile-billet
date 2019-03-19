@@ -5,6 +5,7 @@ import * as moment from 'moment';
 import _ from 'lodash';
 import { LoginService } from '../../services/login.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+//import { Ad } from '../../module/Ad';
 
 @Component({
     selector: 'app-user-tickets',
@@ -14,6 +15,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class UserTicketsPage implements OnInit {
 
     private ticketList: any;
+    private show: boolean;
 
     constructor( private ticketService: TicketsService, private router: Router, private loginService: LoginService, private http: HttpClient ) {
 
@@ -24,6 +26,7 @@ export class UserTicketsPage implements OnInit {
         this.ticketService.getTickets()
             .then(value => { 
                 if (value.length !== 0) {
+                    this.show = true;
                     this.ticketList = value 
                 }
                 else { this.getTickets() }

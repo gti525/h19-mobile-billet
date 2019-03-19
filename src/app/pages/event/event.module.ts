@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { EventPage } from './event.page';
+import { AdModule } from 'src/app/module/AdModule';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    AdModule,
     RouterModule.forChild(routes)
   ],
   declarations: [EventPage]

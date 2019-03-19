@@ -15,24 +15,29 @@
 <ion-content>
 
     <section>
-        <div id="mobile-analytic-banner">test</div>
+        <ad></ad>
     </section>
-
-    <ion-list *ngFor="let ticket of ticketList">
+    <div *ngIf="show; else elseBlock">
+        <ion-list *ngFor="let ticket of ticketList">
         
-        <ion-item lines="none">
-            <ion-label text-wrap>
-                <ion-text>
-                    {{ticket.Date}}
-                </ion-text>
-                <h2>{{ticket.EventName}}</h2>
-                <h2>{{ticket.Artist}}</h2>
-            </ion-label>
-            <ion-button (click)="ticketClickHandler(ticket)">
-                Billet
-            </ion-button>
-        </ion-item>
-        
-    </ion-list>
+            <ion-item lines="none">
+                <ion-label text-wrap>
+                    <ion-text>
+                        {{ticket.Date}}
+                    </ion-text>
+                    <h2>{{ticket.EventName}}</h2>
+                    <h2>{{ticket.Artist}}</h2>
+                </ion-label>
+                <ion-button (click)="ticketClickHandler(ticket)">
+                    Billet
+                </ion-button>
+            </ion-item>
+            
+        </ion-list>
+    </div>
+    
+    <ng-template #elseBlock>
+        Aucun ticket trouvé !
+    </ng-template>
 
 </ion-content>
