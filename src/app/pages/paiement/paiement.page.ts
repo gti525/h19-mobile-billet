@@ -9,7 +9,7 @@ import {AlertController} from '@ionic/angular';
 })
 export class PaiementPage implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private alertController: AlertController) { }
 
   ngOnInit() {
   }
@@ -23,12 +23,10 @@ export class PaiementPage implements OnInit {
       header: 'Paiement effectué avec succès !',
       buttons: ['OK']
     });
-  
       await alert.present();
     }
 
     pay() {
       this.presentConfirmation();
     }
-    
 }
