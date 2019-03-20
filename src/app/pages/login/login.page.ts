@@ -12,7 +12,7 @@ export class LoginPage implements OnInit {
     image: String;
 
     constructor(private loginService: LoginService, private alertController: AlertController) { 
-        this.image = "assets/logo.png";
+        this.image = "assets/Logo_Black.png";
     }
 
     ngOnInit() { }

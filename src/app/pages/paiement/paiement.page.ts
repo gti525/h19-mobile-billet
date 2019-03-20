@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import {AlertController} from '@ionic/angular';
 
 @Component({
   selector: 'app-paiement',
@@ -16,4 +17,18 @@ export class PaiementPage implements OnInit {
   clickReturn() {
     this.router.navigateByUrl('/tabs/parametres')
   }
+
+  async presentConfirmation() {
+    const alert = await this.alertController.create({
+      header: 'Paiement effectué avec succès !',
+      buttons: ['OK']
+    });
+  
+      await alert.present();
+    }
+
+    pay() {
+      this.presentConfirmation();
+    }
+    
 }
