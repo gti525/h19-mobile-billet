@@ -44,9 +44,10 @@ export class UserTicketsPage implements OnInit {
 
                 this.http.get('https://core-api-525.herokuapp.com/api/Ticket', { headers })
                     .subscribe(data => {
+                        console.log(JSON.stringify(data));
                         this.ticketChecker(data);
                         this.ticketService.saveTickets(data)
-                            .then(() => console.log("tickets saved"))
+                            .then(() => console.log('ticket saved'))
                             .catch(err => console.log(err));
                     }, error => {
                         console.log("could not get ticket");
@@ -65,7 +66,7 @@ export class UserTicketsPage implements OnInit {
         
         tickets.map( ticket => {
             if ( !moment().isBefore(ticket.Date) ){
-                _.remove(tickets, t => t.UUID === ticket.UUID )
+                _.remove(tickets, t => t.Id === ticket.Id )
             }
         });
 
