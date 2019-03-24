@@ -94,7 +94,7 @@ export class EventPage implements OnInit {
                     .then(() => console.log("friends saved") )
                     .catch(err => console.log(err))
             }, error => {
-                console.log("could not get ticket");
+                console.log("could not get friends");
                 console.log(error);
             })
     }
