@@ -45,7 +45,7 @@ export class PasserelleService {
             }
         }).subscribe(data => {
           console.log("ca marche")
-          this.resultatEtape1 = "Etape 1 : "+data.result+", numero de transaction : "+data.transaction_number
+          this.resultatEtape1 = "Etape 1 : "+data["result"]+", numero de transaction : "+data["transaction_number"]
           console.log(this.resultatEtape1)
       }, error => {
           console.log("erreur")
@@ -64,7 +64,7 @@ export class PasserelleService {
       "MERCHANT_API_KEY": this.API_KEY_PASSERELLE
     }).subscribe(data => {
           console.log("ca marche")
-          this.resultatEtape1 = "Etape 2 : "+data.result
+          this.resultatEtape1 = "Etape 2 : "+data["result"]
           console.log(this.resultatEtape2)
       }, error => {
           console.log("erreur")
@@ -81,7 +81,7 @@ export class PasserelleService {
         
       }).subscribe(data => {
             console.log("ca marche")
-            this.resultatEtape3 = "Etape 3 : "+data.result
+            this.resultatEtape3 = "Etape 3 : "+data["result"]
             console.log(this.resultatEtape3)
         }, error => {
             console.log("erreur")

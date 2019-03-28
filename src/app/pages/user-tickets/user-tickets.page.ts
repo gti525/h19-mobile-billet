@@ -34,27 +34,25 @@ export class UserTicketsPage implements OnInit {
             .catch(() => this.getTickets());
     }
 
-    getTickets () {
-        this.loginService.getUserInfo()
-            .then(value => {
-                const headers = new HttpHeaders({
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${value.Token}`
-                })
+    async getTickets () {
+        let user = await this.loginService.getUserInfo();
+        
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${user.Token}`
+        });
 
-                this.http.get('https://core-api-525.herokuapp.com/api/Ticket', { headers })
-                    .subscribe(data => {
-                        console.log(JSON.stringify(data));
-                        this.ticketChecker(data);
-                        this.ticketService.saveTickets(data)
-                            .then(() => console.log('ticket saved'))
-                            .catch(err => console.log(err));
-                    }, error => {
-                        console.log("could not get ticket");
-                        console.log(error);
-                    })
-            })
-            .catch(err => console.log(err));
+        this.http.get('https://core-api-525.herokuapp.com/api/Ticket', { headers })
+            .subscribe(data => {
+                console.log(JSON.stringify(data));
+                this.ticketChecker(data);
+                this.ticketService.saveTickets(data)
+                    .then(() => console.log('ticket saved'))
+                    .catch(err => console.log(err));
+            }, error => {
+                console.log("could not get ticket");
+                console.log(error);
+            });
     }
 
     ticketClickHandler (ticket) {

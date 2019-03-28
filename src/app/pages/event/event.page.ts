@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from 'src/app/services/event.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { LoginService } from 'src/app/services/login.service';
 
 
 @Component({
@@ -12,7 +13,7 @@ export class EventPage implements OnInit {
 
     friendList: any;
 
-    constructor( private eventService: EventService, private http: HttpClient ) { }
+    constructor( private eventService: EventService, private loginService: LoginService, private http: HttpClient ) { }
 
     ngOnInit() {
         this.getFriends();
@@ -80,11 +81,12 @@ export class EventPage implements OnInit {
         // ]
     }
 
-    getFriends () {
+    async getFriends () {
+        let user = await this.loginService.getUserInfo();
         const headers = new HttpHeaders({
             'Content-Type': 'application/json',
-            'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyIiwibmJmIjoxNTUyOTI4Mjc4LCJleHAiOjE1NTM1MzMwNzgsImlhdCI6MTU1MjkyODI3OH0.LPaMQEVXF_MC5MbNJvwmuh84crbGdEbZx4ktDnvuJFc`
-        })
+            'Authorization': `Bearer ${user.Token}`
+        });
 
         this.http.get('https://core-api-525.herokuapp.com/api/Client/friend', { headers })
             .subscribe(data => {
