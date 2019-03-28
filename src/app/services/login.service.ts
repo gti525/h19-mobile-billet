@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
+import { TicketsService } from './tickets.service';
+import { EventService } from './event.service';
 
 @Injectable({
     providedIn: 'root'
@@ -9,7 +11,13 @@ import { Router } from '@angular/router';
 export class LoginService {
     private USER_INFO = "userKey";
 
-    constructor(private http: HttpClient, private storage: Storage, private router: Router) { }
+    constructor(
+        private http: HttpClient, 
+        private storage: Storage, 
+        private router: Router,
+        private ticketService: TicketsService, 
+        private eventService: EventService
+        ) { }
 
     login(username, password) {
 
@@ -33,8 +41,10 @@ export class LoginService {
             });
     }
 
-    deleteUserInfo(){
-        return this.storage.set(this.USER_INFO, null);
+    async deleteUserInfo(){
+        await this.storage.set(this.USER_INFO, null);
+        await this.eventService.deleteFriends();
+        await this.ticketService.deleteTickets();
     }
 
     getUserInfo(){

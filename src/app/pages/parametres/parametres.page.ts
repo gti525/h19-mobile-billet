@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 import { TicketsService } from 'src/app/services/tickets.service';
+import { EventService } from 'src/app/services/event.service';
 
 @Component({
     selector: 'app-parametres',
@@ -12,7 +13,7 @@ export class ParametresPage implements OnInit {
 
     userName: String
 
-    constructor(private router: Router, private loginService: LoginService, private ticketService: TicketsService) { }
+    constructor(private router: Router, private loginService: LoginService) { }
 
     ngOnInit() {
 
@@ -31,11 +32,7 @@ export class ParametresPage implements OnInit {
     clickReturnLogin() {
         this.loginService.deleteUserInfo()
             .then(() => {
-                this.ticketService.deleteTickets()
-                    .then(() => this.router.navigateByUrl('/') )
-                    .catch(err => {
-                        console.log(err);
-                    })
+                this.router.navigateByUrl('/');
             })
             .catch(err => {
                 console.log(err);
