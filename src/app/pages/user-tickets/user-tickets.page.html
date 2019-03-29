@@ -14,7 +14,7 @@
 
 <ion-content>
 
-    <section>
+    <section *ngIf="!isPremium">
         <ad></ad>
     </section>
     <ion-button (click)="ngOnInit()">

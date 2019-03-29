@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EventService } from 'src/app/services/event.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoginService } from 'src/app/services/login.service';
+import { SettingService } from 'src/app/services/setting.service';
 
 
 @Component({
@@ -12,10 +13,17 @@ import { LoginService } from 'src/app/services/login.service';
 export class EventPage implements OnInit {
 
     friendList: any;
+    private isPremium: boolean;
 
-    constructor( private eventService: EventService, private loginService: LoginService, private http: HttpClient ) { }
+    constructor( 
+        private eventService: EventService, 
+        private loginService: LoginService, 
+        private http: HttpClient,
+        private settingService: SettingService
+        ) { }
 
     ngOnInit() {
+        this.isPremium = this.settingService.getPremium();
         this.getFriends();
         this.eventService.getFriends()
             .then(value => {

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/login.service';
-import { TicketsService } from 'src/app/services/tickets.service';
-import { EventService } from 'src/app/services/event.service';
+import { SettingService } from 'src/app/services/setting.service';
 
 @Component({
     selector: 'app-parametres',
@@ -11,22 +10,20 @@ import { EventService } from 'src/app/services/event.service';
 })
 export class ParametresPage implements OnInit {
 
-    userName: String
+    userName: String;
+    isPremium: boolean;
 
-    constructor(private router: Router, private loginService: LoginService) { }
+    constructor(
+        private router: Router, 
+        private loginService: LoginService,
+        private settingService: SettingService
+        ) { }
 
-    ngOnInit() {
-
-    }
-
-    ngAfterContentInit(){
-        this.loginService.getUserInfo().then(
-            value => {
-                console.log("set le nom de lutilisateur "+value.FirstName+" "+value.LastName)
-                this.userName = value.FirstName+" "+value.LastName;
-            }
-        )
-        .catch(() => console.log("could not retrieve local storage"))
+    async ngOnInit() {
+        this.isPremium = this.settingService.getPremium();
+        console.log(this.isPremium);
+        let info = await this.loginService.getUserInfo();
+        this.userName = info.FirstName + " " + info.LastName;
     }
 
     clickReturnLogin() {
@@ -42,5 +39,9 @@ export class ParametresPage implements OnInit {
     removeAdsClickHandler() {
         console.log("removeAdsClickHandler")
         this.router.navigateByUrl('paiement');
+    }
+
+    setPremium(){
+        this.settingService.setPremium(!this.isPremium);
     }
 }

@@ -5,6 +5,7 @@ import * as moment from 'moment';
 import _ from 'lodash';
 import { LoginService } from '../../services/login.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { SettingService } from 'src/app/services/setting.service';
 //import { Ad } from '../../module/Ad';
 
 @Component({
@@ -16,13 +17,19 @@ export class UserTicketsPage implements OnInit {
 
     private ticketList: any;
     private show: boolean;
+    private isPremium: boolean;
 
-    constructor( private ticketService: TicketsService, private router: Router, private loginService: LoginService, private http: HttpClient ) {
-
-    }
+    constructor( 
+        private ticketService: TicketsService, 
+        private router: Router, 
+        private loginService: LoginService, 
+        private http: HttpClient,
+        private settingService: SettingService
+        ) { }
 
     ngOnInit() {
         // make api GET Ticket if there is no ticket in local storage
+        this.isPremium = this.settingService.getPremium();
         this.ticketService.getTickets()
             .then(value => { 
                 if (value.length !== 0) {
