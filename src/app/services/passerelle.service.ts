@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { LoginService } from 'src/app/services/login.service';
+import { SettingService } from 'src/app/services/setting.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +26,7 @@ export class PasserelleService {
   private API = "https://core-api-525.herokuapp.com/api/Client/changePremiumState"
   private resultatEtape3 = "";
 
-  constructor(private http: HttpClient, private loginService: LoginService) {
-
+  constructor(private http: HttpClient, private loginService: LoginService, private settingService: SettingService, private router: Router) {
   }
 
   paiementPreniumEtape1(prenomCC, nomCC, numeroCC, cvvCC, moisExpCC, anneeExpCC) {
@@ -98,15 +99,30 @@ export class PasserelleService {
           console.log(JSON.stringify(headers))
 
           this.http.post(this.API, {}, { headers: headers })
-          .subscribe(data => {
-                console.log("ca marche")
-                this.resultatEtape3 = "Etape 3 : "+data["result"]
-                console.log(this.resultatEtape3)
-            }, error => {
-                console.log("erreur")
-                this.resultatEtape3 = "Etape 3 (erreur) : "+error.status+", erreur : "+error.error+", details : "+error.headers
-                console.log(JSON.stringify(error))
-                console.log(this.resultatEtape3)
+          .subscribe(error => {
+              console.log("erreur")
+              this.resultatEtape3 = "Etape 3 (erreur) : "+error["status"]+", erreur : "+error["error"]+", details : "+error["headers"]
+              console.log(JSON.stringify(error))
+              console.log(this.resultatEtape3)
+              this.settingService.setPremium(true);
+            }, data => {
+              console.log("ca marche")
+              var messageRecu = data["error"]["text"]+""
+              this.resultatEtape3 = "Etape 3 : "+messageRecu
+              if(messageRecu.endsWith("True")){
+                console.log("The message ends with true, so the user is now prenium")
+                this.settingService.setPremium(true);
+                // todo : afficher une alerte pour dire a lutilisateur quil est prenium
+                // todo : afficher les logs des trois etapes (dans la meme alert?)
+                // todo : retourner l'utilisateur dans la pages parametre et desactiver la possiblite de desactiver les pubs
+                this.router.navigateByUrl('/parametres');
+              } else {
+                // todo : essayer de faire en sorte que lutilisateur ne puisse pas revenir a un compte normale sil y est deja prenium
+                console.log("Error : the meesage received from the api didnt end with true (in this case it ended with false)")
+                this.settingService.setPremium(false);
+              }
+              console.log(JSON.stringify(data))
+              console.log(this.resultatEtape3)
             });
 
         }

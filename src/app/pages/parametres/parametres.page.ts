@@ -40,9 +40,4 @@ export class ParametresPage implements OnInit {
         console.log("removeAdsClickHandler")
         this.router.navigateByUrl('paiement');
     }
-
-    setPremium(){
-        console.log("the user is prenium? "+this.isPremium)
-        //this.settingService.setPremium(!this.isPremium);
-    }
 }
