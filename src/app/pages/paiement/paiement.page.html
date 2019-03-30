@@ -15,30 +15,52 @@
     <ad></ad>
   </section>
 
-    <form action="" padding>
+    <div padding>
       <ion-label>Nom</ion-label>
       <ion-input name="nom" [(ngModel)]="nom"></ion-input>
       <ion-label>Prenom</ion-label>
       <ion-input name="prenom" [(ngModel)]="prenom"></ion-input>
       <ion-label>Numero de carte de credit</ion-label>
       <ion-input name="numero" [(ngModel)]="numeroCC" type="number" maxlength="4"></ion-input>
-      <ion-row>
-        <ion-label>Date d'expiration (Mois)</ion-label>
-        <ion-input name="date d'expiration" [(ngModel)]="expMois" type="number"maxlength="2"></ion-input>
-        <ion-label>Date d'expiration (Annee)</ion-label>
-        <ion-input name="date d'expiration" [(ngModel)]="expAnnee" type="number" maxlength="4"></ion-input>
-        <ion-label >CVV</ion-label>
-        <ion-input name="cvv" [(ngModel)]="cvv" type="number" maxlength="3"></ion-input>
-         <!-- <ion-col class="col" size="2">
-          Date d'expiration
-        </ion-col> -->
-          
-      </ion-row>
-        <section>
-          Total : 2.00$
-        </section>
+      <ion-label>Date d'expiration (Mois)</ion-label>
+      <!-- <ion-input disabled="true" name="date d'expiration" [(ngModel)]="expMois" type="number"maxlength="2"></ion-input> -->
+      <ion-select interface="popover" value="1" okText="Ok" [(ngModel)]="expMois">
+        <ion-select-option value="1">Janvier</ion-select-option>
+        <ion-select-option value="2">Fevrier</ion-select-option>
+        <ion-select-option value="3">Mars</ion-select-option>
+        <ion-select-option value="4">Avril</ion-select-option>
+        <ion-select-option value="5">Mai</ion-select-option>
+        <ion-select-option value="6">Juin</ion-select-option>
+        <ion-select-option value="7">Juillet</ion-select-option>
+        <ion-select-option value="8">Aout</ion-select-option>
+        <ion-select-option value="9">Septembre</ion-select-option>
+        <ion-select-option value="10">Octobre</ion-select-option>
+        <ion-select-option value="11">Novembre</ion-select-option>
+        <ion-select-option value="12">Decembre</ion-select-option>
+      </ion-select>
+      <ion-label>Date d'expiration (Annee)</ion-label>
+      <ion-select interface="popover" value="2019" okText="Ok" [(ngModel)]="expMois">
+        <ion-select-option value="2019">2019</ion-select-option>
+        <ion-select-option value="2020">2020</ion-select-option>
+        <ion-select-option value="2021">2021</ion-select-option>
+        <ion-select-option value="2022">2022</ion-select-option>
+        <ion-select-option value="2023">2023</ion-select-option>
+        <ion-select-option value="2024">2024</ion-select-option>
+        <ion-select-option value="2025">2025</ion-select-option>
+        <ion-select-option value="2026">2026</ion-select-option>
+        <ion-select-option value="2027">2027</ion-select-option>
+        <ion-select-option value="2028">2028</ion-select-option>
+        <ion-select-option value="2029">2029</ion-select-option>
+        <ion-select-option value="2030">2030</ion-select-option>
+      </ion-select>
+      <ion-input name="date d'expiration" [(ngModel)]="expAnnee" type="number" maxlength="4"></ion-input>
+      <ion-label >CVV</ion-label>
+      <ion-input name="cvv" [(ngModel)]="cvv" type="number" maxlength="3"></ion-input>
+      <section>
+        Total : 2.00$
+      </section>
       <ion-button (click)="pay()" >Effectuer le paiement</ion-button>
-    </form>
+    </div>
     
 
 </ion-content>
