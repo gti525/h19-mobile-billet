@@ -11,7 +11,7 @@ import { SettingService } from 'src/app/services/setting.service';
 export class ParametresPage implements OnInit {
 
     userName: String;
-    isPremium: boolean;
+    isPremium: boolean = false;
 
     constructor(
         private router: Router, 
@@ -42,6 +42,7 @@ export class ParametresPage implements OnInit {
     }
 
     setPremium(){
-        this.settingService.setPremium(!this.isPremium);
+        console.log("the user is prenium? "+this.isPremium)
+        //this.settingService.setPremium(!this.isPremium);
     }
 }

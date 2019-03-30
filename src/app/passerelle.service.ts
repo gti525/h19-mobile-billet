@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
-import { LoginService } from 'src/app/services/login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,17 +19,14 @@ export class PasserelleService {
   private resultatEtape2 = "";
 
   //ETAPE 3
-  private API = "https://core-api-525.herokuapp.com/api/Client/changePremiumState"
+  private API = ""
   private resultatEtape3 = "";
 
-  constructor(private http: HttpClient, private loginService: LoginService) {
+  constructor(private http: HttpClient) {
 
   }
 
   paiementPreniumEtape1(prenomCC, nomCC, numeroCC, cvvCC, moisExpCC, anneeExpCC) {
-    // todo : il faut verifier si lutilisateur est pas deja prenium
-    // todo : il faut faire de la validation de formulaire 
-    // (ca serait plus facile dutiliser des select et des max length pour les input)
     // pas oublige de mettre le content-type?
     console.log("paiementPreniumEtape1")
     this.http.post(this.API_URL_PASSERELLE+this.API_POST_REQUEST_PASSERELLE_CREATE, {
@@ -50,9 +45,9 @@ export class PasserelleService {
             }
         }).subscribe(data => {
           console.log("ca marche")
-          this.resultatEtape1 = "Etape 1 : "+data["result"]+", numero de transaction : "+data["transaction_number"]
-          console.log("resultat etape 1 "+this.resultatEtape1)
-          this.paiementPreniumEtape2(data["transaction_number"])
+          this.resultatEtape1 = "Etape 1 : "+data['_body']+", numero de transaction : "+data['_body']["transaction_number"]
+          //console.log(this.resultatEtape1)
+          this.paiementPreniumEtape2(data['_body']["transaction_number"])
       }, error => {
           console.log("erreur")
           this.resultatEtape1 = "Etape 1 (erreur) : "+error.status+", erreur : "+error.error+", details : "+error.headers
@@ -61,7 +56,7 @@ export class PasserelleService {
   }
 
   //ne marche pas encore, il faut attendre l'equipe de passerelle
-  paiementPreniumEtape2(numeroTransaction: String) {
+  paiementPreniumEtape2(numeroTransaction) {
     // pas oublige de mettre le content-type?
     console.log("paiementPreniumEtape2")
     this.http.post(this.API_URL_PASSERELLE+this.API_POST_REQUEST_PASSERELLE_PROCESS, {
@@ -70,9 +65,8 @@ export class PasserelleService {
       "MERCHANT_API_KEY": this.API_KEY_PASSERELLE
     }).subscribe(data => {
           console.log("ca marche")
-          this.resultatEtape2 = "Etape 2 : "+data["result"]
+          this.resultatEtape1 = "Etape 2 : "+data['_body']
           console.log(this.resultatEtape2)
-          this.paiementPreniumEtape3()
       }, error => {
           console.log("erreur")
           this.resultatEtape2 = "Etape 2 (erreur) : "+error.status+", erreur : "+error.error+", details : "+error.headers
@@ -81,35 +75,19 @@ export class PasserelleService {
   }
 
     //ne marche pas encore, il faut attendre l'equipe de reseau social (pour update le compte de l'utilisateur)
-    paiementPreniumEtape3() {
+    paiementPreniumEtape3(numeroTransaction) {
       // pas oublige de mettre le content-type?
-      let token = ""
-      this.loginService.getUserInfo().then(
-        value => {
-          token = value.Token
-          console.log("le token de l'utilisateur est "+token)
-          
-          const headers = new HttpHeaders({
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          });
-
-          console.log("les header2")
-          console.log(JSON.stringify(headers))
-
-          this.http.post(this.API, { headers: headers })
-          .subscribe(data => {
-                console.log("ca marche")
-                this.resultatEtape3 = "Etape 3 : "+data["result"]
-                console.log(this.resultatEtape3)
-            }, error => {
-                console.log("erreur")
-                this.resultatEtape3 = "Etape 3 (erreur) : "+error.status+", erreur : "+error.error+", details : "+error.headers
-                console.log(JSON.stringify(error))
-                console.log(this.resultatEtape3)
-            });
-
-        }
-      ).catch(() => console.log("pas reussi a avoir le token de l'utilisateur"))
+      console.log("paiementPreniumEtape3")
+      this.http.post(this.API, {
+        
+      }).subscribe(data => {
+            console.log("ca marche")
+            this.resultatEtape3 = "Etape 3 : "+data['_body']
+            console.log(this.resultatEtape3)
+        }, error => {
+            console.log("erreur")
+            this.resultatEtape3 = "Etape 3 (erreur) : "+error.status+", erreur : "+error.error+", details : "+error.headers
+            console.log(this.resultatEtape3)
+        });
     }
 }
