@@ -13,7 +13,7 @@ export class PaiementPage implements OnInit {
   nom: String;
   prenom: String;
   numeroCC: Number;
-  expMois: String;
+  expMois:String
   expAnnee: String;
   cvv: String;
 
@@ -36,6 +36,7 @@ export class PaiementPage implements OnInit {
     }
 
     pay() {
+      console.log("le mois "+this.expMois)
       this.passerelleService.paiementPreniumEtape1(this.prenom, this.nom, this.numeroCC, this.cvv, this.expMois, this.expAnnee)
     }
 }
