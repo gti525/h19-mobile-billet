@@ -17,6 +17,8 @@ export class TicketsService {
     }
   
     saveTickets (tickets) {
+        console.log(tickets);
+        console.log('hi')
         return this.storage.set(this.TICKET_INFO, tickets);
     }
 

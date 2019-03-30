@@ -17,16 +17,18 @@
 
     <form action="" padding>
       <ion-label>Nom</ion-label>
-      <ion-input name="nom"></ion-input>
+      <ion-input name="nom" [(ngModel)]="nom"></ion-input>
       <ion-label>Prenom</ion-label>
-      <ion-input name="prenom"></ion-input>
+      <ion-input name="prenom" [(ngModel)]="prenom"></ion-input>
       <ion-label>Numero de carte de credit</ion-label>
-      <ion-input name="numero"></ion-input>
+      <ion-input name="numero" [(ngModel)]="numeroCC" type="number" maxlength="4"></ion-input>
       <ion-row>
-        <ion-label>Date d'expiration</ion-label>
-        <ion-input name="date d'expiration"></ion-input>
-        <ion-label>CVV</ion-label>
-        <ion-input name="cvv"></ion-input>
+        <ion-label>Date d'expiration (Mois)</ion-label>
+        <ion-input name="date d'expiration" [(ngModel)]="expMois" type="number"maxlength="2"></ion-input>
+        <ion-label>Date d'expiration (Annee)</ion-label>
+        <ion-input name="date d'expiration" [(ngModel)]="expAnnee" type="number" maxlength="4"></ion-input>
+        <ion-label >CVV</ion-label>
+        <ion-input name="cvv" [(ngModel)]="cvv" type="number" maxlength="3"></ion-input>
          <!-- <ion-col class="col" size="2">
           Date d'expiration
         </ion-col> -->

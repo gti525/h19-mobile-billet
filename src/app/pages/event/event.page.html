@@ -7,25 +7,30 @@
 
 <ion-content>
 
-<section>
-    <ad></ad>
-</section>
+    <section *ngIf="!isPremium">
+        <ad></ad>
+    </section>
 
-<ion-list *ngFor="let ticket of ticketList">
-  <ion-item lines="none">
-    <ion-label text wrap>
-      <ion-text>
-        {{ticket.date}}
-      </ion-text>
-      <h2>{{ticket.event}}</h2>
-  </ion-label>
-    <ion-button>
-      <ion-icon name="arrow-dropup" color="primary-contrast"></ion-icon>
-      2 amis participent
-    </ion-button>
-       
-  </ion-item>
-
-</ion-list>
+    <ion-list *ngFor="let friend of friendList">
+        <ion-item lines="none">
+            <ion-label text wrap>
+                <h2>
+                    {{friend.FirstName}}
+                </h2>
+            
+                <ion-list *ngFor="let ticket of friend.Tickets">
+                    <ion-item lines="none">
+                        <ion-label text wrap>
+                            <ion-text>
+                                {{ticket.Date}}
+                            </ion-text>
+                            <h2>{{ticket.EventName}}</h2>
+                            <h2>{{ticket.Artist}}</h2>
+                        </ion-label>
+                    </ion-item>
+                </ion-list>
+            </ion-label>
+        </ion-item>
+    </ion-list>
 
 </ion-content>

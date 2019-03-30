@@ -5,6 +5,7 @@ import * as moment from 'moment';
 import _ from 'lodash';
 import { LoginService } from '../../services/login.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { SettingService } from 'src/app/services/setting.service';
 //import { Ad } from '../../module/Ad';
 
 @Component({
@@ -16,13 +17,19 @@ export class UserTicketsPage implements OnInit {
 
     private ticketList: any;
     private show: boolean;
+    private isPremium: boolean;
 
-    constructor( private ticketService: TicketsService, private router: Router, private loginService: LoginService, private http: HttpClient ) {
-
-    }
+    constructor( 
+        private ticketService: TicketsService, 
+        private router: Router, 
+        private loginService: LoginService, 
+        private http: HttpClient,
+        private settingService: SettingService
+        ) { }
 
     ngOnInit() {
         // make api GET Ticket if there is no ticket in local storage
+        this.isPremium = this.settingService.getPremium();
         this.ticketService.getTickets()
             .then(value => { 
                 if (value.length !== 0) {
@@ -34,26 +41,25 @@ export class UserTicketsPage implements OnInit {
             .catch(() => this.getTickets());
     }
 
-    getTickets () {
-        this.loginService.getUserInfo()
-            .then(value => {
-                const headers = new HttpHeaders({
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${value.Token}`
-                })
+    async getTickets () {
+        let user = await this.loginService.getUserInfo();
+        
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${user.Token}`
+        });
 
-                this.http.get('https://core-api-525.herokuapp.com/api/Ticket', { headers })
-                    .subscribe(data => {
-                        this.ticketChecker(data);
-                        this.ticketService.saveTickets(data)
-                            .then(() => console.log("tickets saved"))
-                            .catch(err => console.log(err));
-                    }, error => {
-                        console.log("could not get ticket");
-                        console.log(error);
-                    })
-            })
-            .catch(err => console.log(err));
+        this.http.get('https://core-api-525.herokuapp.com/api/Ticket', { headers })
+            .subscribe(data => {
+                console.log(JSON.stringify(data));
+                this.ticketChecker(data);
+                this.ticketService.saveTickets(data)
+                    .then(() => console.log('ticket saved'))
+                    .catch(err => console.log(err));
+            }, error => {
+                console.log("could not get ticket");
+                console.log(error);
+            });
     }
 
     ticketClickHandler (ticket) {
@@ -65,7 +71,7 @@ export class UserTicketsPage implements OnInit {
         
         tickets.map( ticket => {
             if ( !moment().isBefore(ticket.Date) ){
-                _.remove(tickets, t => t.UUID === ticket.UUID )
+                _.remove(tickets, t => t.Id === ticket.Id )
             }
         });
 

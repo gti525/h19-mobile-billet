@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {AlertController} from '@ionic/angular';
+import { PasserelleService } from 'src/app/services/passerelle.service';
 
 @Component({
   selector: 'app-paiement',
@@ -9,7 +10,15 @@ import {AlertController} from '@ionic/angular';
 })
 export class PaiementPage implements OnInit {
 
-  constructor(private router: Router) { }
+  nom: String;
+  prenom: String;
+  numeroCC: Number;
+  expMois: String;
+  expAnnee: String;
+  cvv: String;
+
+
+  constructor(private router: Router, private alertController: AlertController, private passerelleService: PasserelleService) { }
 
   ngOnInit() {
   }
@@ -23,12 +32,10 @@ export class PaiementPage implements OnInit {
       header: 'Paiement effectué avec succès !',
       buttons: ['OK']
     });
-  
       await alert.present();
     }
 
     pay() {
-      this.presentConfirmation();
+      this.passerelleService.paiementPreniumEtape1(this.prenom, this.nom, this.numeroCC, this.cvv, this.expMois, this.expAnnee)
     }
-    
 }
