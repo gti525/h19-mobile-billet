@@ -97,7 +97,7 @@ export class PasserelleService {
           console.log("les header2")
           console.log(JSON.stringify(headers))
 
-          this.http.post(this.API, { headers: headers })
+          this.http.post(this.API, {}, { headers: headers })
           .subscribe(data => {
                 console.log("ca marche")
                 this.resultatEtape3 = "Etape 3 : "+data["result"]
