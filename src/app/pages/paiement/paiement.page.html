@@ -23,8 +23,7 @@
       <ion-label>Numero de carte de credit</ion-label>
       <ion-input name="numero" [(ngModel)]="numeroCC" type="number" maxlength="4"></ion-input>
       <ion-label>Date d'expiration (Mois)</ion-label>
-      <!-- <ion-input disabled="true" name="date d'expiration" [(ngModel)]="expMois" type="number"maxlength="2"></ion-input> -->
-      <ion-select interface="popover" value="1" okText="Ok" [(ngModel)]="expMois">
+      <ion-select placeholder="Choisissez le mois" interface="popover" okText="Ok" [(ngModel)]="expMois">
         <ion-select-option value="1">Janvier</ion-select-option>
         <ion-select-option value="2">Fevrier</ion-select-option>
         <ion-select-option value="3">Mars</ion-select-option>
@@ -39,7 +38,7 @@
         <ion-select-option value="12">Decembre</ion-select-option>
       </ion-select>
       <ion-label>Date d'expiration (Annee)</ion-label>
-      <ion-select interface="popover" value="2019" okText="Ok" [(ngModel)]="expMois">
+      <ion-select placeholder="Choisissez l'annee" interface="popover" okText="Ok" [(ngModel)]="expAnnee">
         <ion-select-option value="2019">2019</ion-select-option>
         <ion-select-option value="2020">2020</ion-select-option>
         <ion-select-option value="2021">2021</ion-select-option>
@@ -53,7 +52,6 @@
         <ion-select-option value="2029">2029</ion-select-option>
         <ion-select-option value="2030">2030</ion-select-option>
       </ion-select>
-      <ion-input name="date d'expiration" [(ngModel)]="expAnnee" type="number" maxlength="4"></ion-input>
       <ion-label >CVV</ion-label>
       <ion-input name="cvv" [(ngModel)]="cvv" type="number" maxlength="3"></ion-input>
       <section>
