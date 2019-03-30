@@ -4,6 +4,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { LoginService } from 'src/app/services/login.service';
 import { SettingService } from 'src/app/services/setting.service';
 import { Router } from '@angular/router';
+import {AlertController} from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,11 @@ export class PasserelleService {
   private API = "https://core-api-525.herokuapp.com/api/Client/changePremiumState"
   private resultatEtape3 = "";
 
-  constructor(private http: HttpClient, private loginService: LoginService, private settingService: SettingService, private router: Router) {
+  constructor(private http: HttpClient, 
+    private loginService: LoginService, 
+    private settingService: SettingService, 
+    private router: Router, 
+    private alertController: AlertController) {
   }
 
   paiementPreniumEtape1(prenomCC, nomCC, numeroCC, cvvCC, moisExpCC, anneeExpCC) {
@@ -112,10 +117,9 @@ export class PasserelleService {
               if(messageRecu.endsWith("True")){
                 console.log("The message ends with true, so the user is now prenium")
                 this.settingService.setPremium(true);
-                // todo : afficher une alerte pour dire a lutilisateur quil est prenium
                 // todo : afficher les logs des trois etapes (dans la meme alert?)
                 // todo : retourner l'utilisateur dans la pages parametre et desactiver la possiblite de desactiver les pubs
-                this.router.navigateByUrl('/parametres');
+                this.afficherConfirmation()
               } else {
                 // todo : essayer de faire en sorte que lutilisateur ne puisse pas revenir a un compte normale sil y est deja prenium
                 console.log("Error : the meesage received from the api didnt end with true (in this case it ended with false)")
@@ -127,5 +131,20 @@ export class PasserelleService {
 
         }
       ).catch(() => console.log("pas reussi a avoir le token de l'utilisateur"))
+    }
+
+    async afficherConfirmation(){
+      console.log("afficherConfirmation")
+      const alert = await this.alertController.create({
+        header: 'Confirmation',
+        backdropDismiss: false,
+        message: 'Vous etes maintenant prenium',
+        buttons: [{
+          text: 'OK',
+          handler: () => {
+            this.router.navigateByUrl('/parametres');
+        }}]
+      });
+      return await alert.present();
     }
 }
