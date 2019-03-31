@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { TicketsService } from './tickets.service';
 import { EventService } from './event.service';
 import { SettingService } from './setting.service';
+import {AlertController} from '@ionic/angular';
 
 @Injectable({
     providedIn: 'root'
@@ -18,7 +19,8 @@ export class LoginService {
         private router: Router,
         private ticketService: TicketsService, 
         private eventService: EventService,
-        private settingService: SettingService
+        private settingService: SettingService,
+        private alertController: AlertController
         ) { }
 
     login(username, password) {
@@ -41,9 +43,24 @@ export class LoginService {
                     })
                     .catch(err => console.log(err));
             }, error => {
+                var messageRecu = "Erreur de connection : "+error.status+" <ul><li>errerur : "+error["error"]+"</li><ul>"
+                this.afficherErreurConnection(messageRecu, "Reseau social (/login)")
                 console.log('Adresse Email ou mot de passe invalide');
             });
     }
+
+    async afficherErreurConnection(pMessage: string, titre:string){
+        const alert = await this.alertController.create({
+          header: 'Erreur',
+          subHeader: titre,
+          backdropDismiss: false,
+          message: pMessage,
+          buttons: [{
+            text: 'OK'
+          }]
+        });
+        return await alert.present();
+      }
 
     async deleteUserInfo(){
         await this.storage.set(this.USER_INFO, null);
