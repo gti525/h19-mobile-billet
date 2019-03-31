@@ -13,7 +13,7 @@ export class PaiementPage implements OnInit {
 
   nom: String;
   prenom: String;
-  numeroCC: Number;
+  numeroCC: String;
   expMois:String
   expAnnee: String;
   cvv: String;

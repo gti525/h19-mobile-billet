@@ -17,11 +17,11 @@
 
     <div padding>
       <ion-label>Nom</ion-label>
-      <ion-input name="nom" [(ngModel)]="nom"></ion-input>
+      <ion-input name="nom" placeholder="Doe" [(ngModel)]="nom"></ion-input>
       <ion-label>Prenom</ion-label>
-      <ion-input name="prenom" [(ngModel)]="prenom"></ion-input>
+      <ion-input name="prenom" placeholder="Jonh" [(ngModel)]="prenom"></ion-input>
       <ion-label>Numero de carte de credit</ion-label>
-      <ion-input name="numero" [(ngModel)]="numeroCC" type="number" maxlength="16"></ion-input>
+      <ion-input name="numero" [(ngModel)]="numeroCC" type="tel" placeholder="16 chiffres sans espaces" maxlength="16"></ion-input>
       <ion-label>Date d'expiration (Mois)</ion-label>
       <ion-select placeholder="Choisissez le mois" interface="popover" okText="Ok" [(ngModel)]="expMois">
         <ion-select-option value="1">Janvier</ion-select-option>
@@ -53,7 +53,7 @@
         <ion-select-option value="2030">2030</ion-select-option>
       </ion-select>
       <ion-label >CVV</ion-label>
-      <ion-input name="cvv" [(ngModel)]="cvv" type="number" maxlength="3"></ion-input>
+      <ion-input name="cvv" [(ngModel)]="cvv" type="tel" placeholder="3 chiffres sans espaces" maxlength="3"></ion-input>
       <section>
         Total : 2.00$
       </section>
