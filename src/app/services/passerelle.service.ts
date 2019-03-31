@@ -55,14 +55,12 @@ export class PasserelleService {
               }
             }
         }).subscribe(data => {
-          console.log("ca marche")
           this.resultatEtape1 = "Etape 1 : "+data["result"]+", numero de transaction : "+data["transaction_number"]
           console.log("resultat etape 1 "+this.resultatEtape1)
           this.paiementPreniumEtape2(data["transaction_number"])
       }, error => {
-          console.log("erreur")
-          this.resultatEtape1 = "Etape 1 (erreur) : "+error.status+", erreur : "+error.error+", details : "+error.headers
-          console.log(this.resultatEtape1)
+          this.resultatEtape1 = "Etape 1 (erreur) : "+error.status+" <ul><li>erreur : "+error.message+"</li> <li>details : "+error.error.message+"</li></ul>"
+          this.afficherFeedback(this.resultatEtape1, "Passerelle (/create)");
       });
   }
 
@@ -72,7 +70,7 @@ export class PasserelleService {
     console.log("paiementPreniumEtape2")
     this.http.post(this.API_URL_PASSERELLE+this.API_POST_REQUEST_PASSERELLE_PROCESS, {
       "transaction_number": numeroTransaction+"",
-      "action": "CONFIRM",
+      "action": "COMMIT",
       "MERCHANT_API_KEY": this.API_KEY_PASSERELLE
     }).subscribe(data => {
           console.log("ca marche")
@@ -80,9 +78,8 @@ export class PasserelleService {
           console.log(this.resultatEtape2)
           this.paiementPreniumEtape3()
       }, error => {
-          console.log("erreur")
-          this.resultatEtape2 = "Etape 2 (erreur) : "+error.status+", erreur : "+error.error+", details : "+error.headers
-          console.log(this.resultatEtape2)
+          this.resultatEtape2 = "Etape 2 (erreur) : "+error.status+" <ul><li>erreur : "+error.message+"</li> <li>details : "+error.error.message+"</li><ul>"
+          this.afficherFeedback(this.resultatEtape2, "Passerelle (/process)")
       });
   }
 
@@ -117,13 +114,13 @@ export class PasserelleService {
               if(messageRecu.endsWith("True")){
                 console.log("The message ends with true, so the user is now prenium")
                 this.settingService.setPremium(true);
-                // todo : afficher les logs des trois etapes (dans la meme alert?)
-                // todo : retourner l'utilisateur dans la pages parametre et desactiver la possiblite de desactiver les pubs
+                // todo : desactiver la possiblite de desactiver les pubs
                 this.afficherConfirmation()
               } else {
                 // todo : essayer de faire en sorte que lutilisateur ne puisse pas revenir a un compte normale sil y est deja prenium
-                console.log("Error : the meesage received from the api didnt end with true (in this case it ended with false)")
+                //console.log("Error : the meesage received from the api didnt end with true (in this case it ended with false)")
                 this.settingService.setPremium(false);
+                this.afficherFeedback(this.resultatEtape3, "Reseau social (/changePremiumState)");
               }
               console.log(JSON.stringify(data))
               console.log(this.resultatEtape3)
@@ -144,6 +141,19 @@ export class PasserelleService {
           handler: () => {
             this.router.navigateByUrl('/parametres');
         }}]
+      });
+      return await alert.present();
+    }
+
+    async afficherFeedback(pMessage: string, titre:string){
+      const alert = await this.alertController.create({
+        header: 'Erreur',
+        subHeader: titre,
+        backdropDismiss: false,
+        message: pMessage,
+        buttons: [{
+          text: 'OK'
+        }]
       });
       return await alert.present();
     }

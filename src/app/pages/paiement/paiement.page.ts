@@ -44,7 +44,7 @@ export class PaiementPage implements OnInit {
     }
 
     pay() {
-      console.log("le mois "+this.expMois)
+      //console.log("le mois "+this.expMois)
       this.passerelleService.paiementPreniumEtape1(this.prenom, this.nom, this.numeroCC, this.cvv, this.expMois, this.expAnnee)
     }
 }
