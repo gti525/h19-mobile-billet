@@ -18,17 +18,13 @@ export class PaiementPage implements OnInit {
   expAnnee: String;
   cvv: String;
 
-  resultatEtape1 = "resultat de letape 1"
-  resultatEtape2 = "resultat de letape 2"
-  resultatEtape3 = "resultat de letape 3"
-
   constructor(private router: Router, private alertController: AlertController, private passerelleService: PasserelleService, private settingService: SettingService) { }
 
   ngOnInit() {
 
-    if(this.settingService.getPremium() == true){
-      this.router.navigateByUrl('/tabs/parametres')
-    }
+    // if(this.settingService.getPremium() == true){
+    //   this.router.navigateByUrl('/tabs/parametres')
+    // }
   }
 
   clickReturn() {

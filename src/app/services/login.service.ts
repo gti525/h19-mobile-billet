@@ -14,6 +14,8 @@ export class LoginService {
     private USER_INFO = "userKey";
 
     private isUserLoggedIn : boolean = false;
+    
+    private isUserPrenium : boolean = false;
 
     constructor(
         private http: HttpClient, 
@@ -35,9 +37,11 @@ export class LoginService {
             .subscribe(data => {
                 data["Password"] = password;
                 console.log(data);
+                console.log("prenium? "+data["IsPremium"]);
                 this.settingService.setInfo(data);
                 console.log(this.settingService.getInfo());
                 this.isUserLoggedIn = true;
+                this.isUserPrenium = data["IsPremium"]
                 this.storage.set(this.USER_INFO, data)
                     .then(() => {
                         this.getUserInfo()
@@ -54,6 +58,7 @@ export class LoginService {
 
     async afficherErreurConnection(pMessage: string, titre:string){
         this.isUserLoggedIn = false;
+        this.isUserPrenium = false;
         const alert = await this.alertController.create({
           header: 'Erreur',
           subHeader: titre,
@@ -71,10 +76,19 @@ export class LoginService {
         await this.eventService.deleteFriends();
         await this.ticketService.deleteTickets();
         this.isUserLoggedIn = false;
+        this.isUserPrenium = false;
     }
 
     getIsUserLoggedIn() : boolean{
         return this.isUserLoggedIn
+    }
+
+    getIsUserPrenium() : boolean{
+        return this.isUserPrenium
+    }
+
+    setIsUserPrenium(preinum: boolean) {
+        this.isUserPrenium = preinum;
     }
 
     getUserInfo(){

@@ -27,6 +27,8 @@ export class PasserelleService {
   private API = "https://core-api-525.herokuapp.com/api/Client/changePremiumState"
   private resultatEtape3 = "";
 
+  private attenteAlert;
+
   constructor(private http: HttpClient, 
     private loginService: LoginService, 
     private settingService: SettingService, 
@@ -40,6 +42,7 @@ export class PasserelleService {
     // (ca serait plus facile dutiliser des select et des max length pour les input)
     // pas oublige de mettre le content-type?
     console.log("paiementPreniumEtape1")
+    this.afficherVeuillezPatienter()
     this.http.post(this.API_URL_PASSERELLE+this.API_POST_REQUEST_PASSERELLE_CREATE, {
             "MERCHANT_API_KEY": this.API_KEY_PASSERELLE,
             "amount": this.PRIX_PRENIUM,
@@ -55,10 +58,12 @@ export class PasserelleService {
               }
             }
         }).subscribe(data => {
+          this.enleverVeuillezPatienter()
           this.resultatEtape1 = "Etape 1 : "+data["result"]+", numero de transaction : "+data["transaction_number"]
           console.log("resultat etape 1 "+this.resultatEtape1)
           this.paiementPreniumEtape2(data["transaction_number"])
       }, error => {
+        this.enleverVeuillezPatienter()
           this.resultatEtape1 = "Etape 1 (erreur) : "+error.status+" <ul><li>erreur : "+error.message+"</li> <li>details : "+error.error.message+"</li></ul>"
           this.afficherFeedback(this.resultatEtape1, "Passerelle (/create)");
       });
@@ -68,16 +73,19 @@ export class PasserelleService {
   paiementPreniumEtape2(numeroTransaction: String) {
     // pas oublige de mettre le content-type?
     console.log("paiementPreniumEtape2")
+    this.afficherVeuillezPatienter()
     this.http.post(this.API_URL_PASSERELLE+this.API_POST_REQUEST_PASSERELLE_PROCESS, {
       "transaction_number": numeroTransaction+"",
       "action": "COMMIT",
       "MERCHANT_API_KEY": this.API_KEY_PASSERELLE
     }).subscribe(data => {
+          this.enleverVeuillezPatienter()
           console.log("ca marche")
           this.resultatEtape2 = "Etape 2 : "+data["result"]
           console.log(this.resultatEtape2)
           this.paiementPreniumEtape3()
       }, error => {
+          this.enleverVeuillezPatienter()
           this.resultatEtape2 = "Etape 2 (erreur) : "+error.status+" <ul><li>erreur : "+error.message+"</li> <li>details : "+error.error.message+"</li><ul>"
           this.afficherFeedback(this.resultatEtape2, "Passerelle (/process)")
       });
@@ -86,6 +94,7 @@ export class PasserelleService {
     //ne marche pas encore, il faut attendre l'equipe de reseau social (pour update le compte de l'utilisateur)
     paiementPreniumEtape3() {
       // pas oublige de mettre le content-type?
+      this.afficherVeuillezPatienter()
       let token = ""
       this.loginService.getUserInfo().then(
         value => {
@@ -102,12 +111,14 @@ export class PasserelleService {
 
           this.http.post(this.API, {}, { headers: headers })
           .subscribe(error => {
+              this.enleverVeuillezPatienter()
               console.log("erreur")
               this.resultatEtape3 = "Etape 3 (erreur) : "+error["status"]+", erreur : "+error["error"]+", details : "+error["headers"]
               console.log(JSON.stringify(error))
               console.log(this.resultatEtape3)
               this.settingService.setPremium(true);
             }, data => {
+              this.enleverVeuillezPatienter()
               console.log("ca marche")
               var messageRecu = data["error"]["text"]+""
               this.resultatEtape3 = "Etape 3 : "+messageRecu
@@ -115,6 +126,7 @@ export class PasserelleService {
                 console.log("The message ends with true, so the user is now prenium")
                 this.settingService.setPremium(true);
                 // todo : desactiver la possiblite de desactiver les pubs
+                this.loginService.setIsUserPrenium(true)
                 this.afficherConfirmation()
               } else {
                 // todo : essayer de faire en sorte que lutilisateur ne puisse pas revenir a un compte normale sil y est deja prenium
@@ -139,10 +151,26 @@ export class PasserelleService {
         buttons: [{
           text: 'OK',
           handler: () => {
-            this.router.navigateByUrl('/parametres');
+            this.router.navigateByUrl('/tabs/parametres');
         }}]
       });
       return await alert.present();
+    }
+    
+    async afficherVeuillezPatienter(){
+      console.log("afficherVeuillezPatienter")
+      const alert = await this.alertController.create({
+        header: 'En cours de traitement',
+        backdropDismiss: false,
+        message: 'Veuillez patienter'
+      });
+      this.attenteAlert = alert
+      return await this.attenteAlert.present();
+    }
+
+    enleverVeuillezPatienter(){
+      console.log("enleverVeuillezPatienter")
+      this.attenteAlert.dismiss();
     }
 
     async afficherFeedback(pMessage: string, titre:string){
