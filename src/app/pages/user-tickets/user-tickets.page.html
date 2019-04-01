@@ -14,9 +14,13 @@
 
 <ion-content>
 
-    <section>
+    <section *ngIf="!isPremium">
         <ad></ad>
     </section>
+    <ion-button (click)="ngOnInit()">
+        Refresh
+    </ion-button>
+
     <div *ngIf="show; else elseBlock">
         <ion-list *ngFor="let ticket of ticketList">
         

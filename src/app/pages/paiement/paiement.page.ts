@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {AlertController} from '@ionic/angular';
-import { PasserelleService } from 'src/app/passerelle.service';
+import { PasserelleService } from 'src/app/services/passerelle.service';
 
 @Component({
   selector: 'app-paiement',
