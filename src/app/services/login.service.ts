@@ -13,6 +13,8 @@ import {AlertController} from '@ionic/angular';
 export class LoginService {
     private USER_INFO = "userKey";
 
+    private isUserLoggedIn : boolean = false;
+
     constructor(
         private http: HttpClient, 
         private storage: Storage, 
@@ -35,6 +37,7 @@ export class LoginService {
                 console.log(data);
                 this.settingService.setInfo(data);
                 console.log(this.settingService.getInfo());
+                this.isUserLoggedIn = true;
                 this.storage.set(this.USER_INFO, data)
                     .then(() => {
                         this.getUserInfo()
@@ -50,6 +53,7 @@ export class LoginService {
     }
 
     async afficherErreurConnection(pMessage: string, titre:string){
+        this.isUserLoggedIn = false;
         const alert = await this.alertController.create({
           header: 'Erreur',
           subHeader: titre,
@@ -66,6 +70,11 @@ export class LoginService {
         await this.storage.set(this.USER_INFO, null);
         await this.eventService.deleteFriends();
         await this.ticketService.deleteTickets();
+        this.isUserLoggedIn = false;
+    }
+
+    getIsUserLoggedIn() : boolean{
+        return this.isUserLoggedIn
     }
 
     getUserInfo(){
