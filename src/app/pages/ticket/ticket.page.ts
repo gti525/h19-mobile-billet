@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TicketsService } from './../../services/tickets.service';
 import { Router } from '@angular/router';
-import { PreniumProtectionService } from 'src/app/prenium-protection.service';
 
 
 @Component({
@@ -17,13 +16,12 @@ export class TicketPage implements OnInit {
     private EventName: string;
     private Location: string;
 
-    private isPremiumFromService: boolean
-
     constructor (private ticketsService: TicketsService, 
-        private router: Router, 
-        private preniumProtectionService: PreniumProtectionService) { 
-        this.isPremiumFromService = this.preniumProtectionService.getCurrentValue();
-        console.log("TicketPage - the user is prenium? "+this.isPremiumFromService)
+        private router: Router) {
+    }
+
+    ngOnChanges(){
+        console.log("TicketPage - ngOnChanges")
     }
 
     ngOnInit() {

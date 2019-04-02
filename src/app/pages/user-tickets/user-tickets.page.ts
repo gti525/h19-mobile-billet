@@ -6,6 +6,7 @@ import _ from 'lodash';
 import { LoginService } from '../../services/login.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SettingService } from 'src/app/services/setting.service';
+import { PreniumProtectionService } from 'src/app/prenium-protection.service';
 //import { Ad } from '../../module/Ad';
 
 @Component({
@@ -23,8 +24,17 @@ export class UserTicketsPage implements OnInit {
         private router: Router, 
         private loginService: LoginService, 
         private http: HttpClient,
-        private settingService: SettingService
-        ) { }
+        private settingService: SettingService,
+        private preniumProtectionService: PreniumProtectionService
+        ) { 
+            this.preniumProtectionService.getCurrentValue();
+            loginService.getUserInfo().then(info => {
+                console.log("UserTicketsPage (getUserInfo) "+info.IsPremium)
+            })
+            .catch(() => {
+            });
+            console.log("UserTicketsPage (constructor) - the user is prenium? "+this.preniumProtectionService.getCurrentValue()+" "+this.preniumProtectionService.getCurrentValue())
+        }
 
     ngOnInit() {
         // make api GET Ticket if there is no ticket in local storage
@@ -37,6 +47,8 @@ export class UserTicketsPage implements OnInit {
                 else { this.getTickets() }
             })
             .catch(() => this.getTickets());
+
+            console.log("UserTicketsPage (ngOnInit) - the user is prenium? "+this.preniumProtectionService.getCurrentValue())
     }
 
     async getTickets () {

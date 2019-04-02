@@ -6,6 +6,7 @@ import { TicketsService } from './tickets.service';
 import { EventService } from './event.service';
 import { SettingService } from './setting.service';
 import {AlertController} from '@ionic/angular';
+import { PreniumProtectionService } from 'src/app/prenium-protection.service';
 
 @Injectable({
     providedIn: 'root'
