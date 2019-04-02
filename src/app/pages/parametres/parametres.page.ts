@@ -11,7 +11,6 @@ import { SettingService } from 'src/app/services/setting.service';
 export class ParametresPage implements OnInit {
 
     userName: String;
-    isPremium: boolean = false;
 
     constructor(
         private router: Router, 
@@ -20,8 +19,6 @@ export class ParametresPage implements OnInit {
         ) { }
 
     async ngOnInit() {
-        this.isPremium = this.settingService.getPremium();
-        console.log(this.isPremium);
         let info = await this.loginService.getUserInfo();
         this.userName = info.FirstName + " " + info.LastName;
     }

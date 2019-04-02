@@ -13,7 +13,6 @@ import { SettingService } from 'src/app/services/setting.service';
 export class EventPage implements OnInit {
 
     friendList: any;
-    private isPremium: boolean;
 
     constructor( 
         private eventService: EventService, 
@@ -23,7 +22,6 @@ export class EventPage implements OnInit {
         ) { }
 
     ngOnInit() {
-        this.isPremium = this.settingService.getPremium();
         this.getFriends();
         this.eventService.getFriends()
             .then(value => {

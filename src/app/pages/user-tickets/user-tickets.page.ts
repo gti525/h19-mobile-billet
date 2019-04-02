@@ -17,7 +17,6 @@ export class UserTicketsPage implements OnInit {
 
     private ticketList: any;
     private show: boolean;
-    private isPremium: boolean;
 
     constructor( 
         private ticketService: TicketsService, 
@@ -29,7 +28,6 @@ export class UserTicketsPage implements OnInit {
 
     ngOnInit() {
         // make api GET Ticket if there is no ticket in local storage
-        this.isPremium = this.settingService.getPremium();
         this.ticketService.getTickets()
             .then(value => { 
                 if (value.length !== 0) {

@@ -9,7 +9,7 @@
 
 <ion-content >
     
-    <section *ngIf="!isPremium">
+    <section>
         <ad></ad>
     </section>
 
@@ -24,7 +24,9 @@
             <h2>Se déconnecter</h2>
         </ion-item>
 
-        <ion-item *ngIf="!isPremium" lines="none" (click)="removeAdsClickHandler()">
+        <!-- a la place de prendre isPrenium il faut se baser sur 
+        le loginservice ou PreniumProtectionService (je sais pas lequel des deux est le plus fiable...) -->
+        <ion-item lines="none" (click)="removeAdsClickHandler()">
             <ion-icon name="remove" color="primary" ></ion-icon>
             <h2>Désactiver les publicités</h2>
         </ion-item>
