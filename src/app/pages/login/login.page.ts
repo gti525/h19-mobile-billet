@@ -15,7 +15,9 @@ export class LoginPage implements OnInit {
         this.image = "assets/Logo_Black.png";
     }
 
-    ngOnInit() { }
+    ngOnInit() { 
+        // todo? mettre le mot de passe  ou le courriel a null?
+    }
 
     async presentAlert() {
         const alert = await this.alertController.create({
@@ -57,6 +59,5 @@ export class LoginPage implements OnInit {
             .catch(() => {
                 this.presentAlert();
             });
-        
     }
 }
