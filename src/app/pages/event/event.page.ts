@@ -35,60 +35,6 @@ export class EventPage implements OnInit {
                 else this.getFriends();
             })
             .catch(() => this.getFriends());
-        // this.friendList = [
-        //     {
-        //         ClientId: 1,
-        //         FirstName: "Bob",
-        //         Tickets: [
-        //             {
-        //                 "Id": 45,
-        //                 "UUID": 54677,
-        //                 "EventName": "ROUGE",
-        //                 "Artist": "Barbe bleue",
-        //                 "Date": "2019-05-25T00:00:00",
-        //                 "Location": "Mtl",
-        //                 "ClientId": 0,
-        //                 "Client": null
-        //             },
-        //             {
-        //                 "Id": 46,
-        //                 "UUID": 65744,
-        //                 "EventName": "BLEU",
-        //                 "Artist": "Barbe bleue",
-        //                 "Date": "2019-05-25T00:00:00",
-        //                 "Location": "Mtl",
-        //                 "ClientId": 0,
-        //                 "Client": null
-        //             }
-        //         ]
-        //     },
-        //     {
-        //         ClientId: 2,
-        //         FirstName: "Alice",
-        //         Tickets: [
-        //             {
-        //                 "Id": 45,
-        //                 "UUID": 54677,
-        //                 "EventName": "ORANGE",
-        //                 "Artist": "Barbe bleue",
-        //                 "Date": "2019-05-25T00:00:00",
-        //                 "Location": "Mtl",
-        //                 "ClientId": 0,
-        //                 "Client": null
-        //             },
-        //             {
-        //                 "Id": 46,
-        //                 "UUID": 65744,
-        //                 "EventName": "VIOLET",
-        //                 "Artist": "Barbe bleue",
-        //                 "Date": "2019-05-25T00:00:00",
-        //                 "Location": "Mtl",
-        //                 "ClientId": 0,
-        //                 "Client": null
-        //             }
-        //         ]
-        //     }
-        // ]
     }
 
     async getFriends () {
