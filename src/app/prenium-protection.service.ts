@@ -14,14 +14,17 @@ export class PreniumProtectionService {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean{
     //on retourne seulement true si l'utilisateur est prenium
+    console.log("PreniumProtectionService - canActivate")
     return !this.currentValue;
   }
 
   getCurrentValue(): boolean{
+    console.log("PreniumProtectionService - getCurrentValue")
     return !this.currentValue;
   }
 
   setIsPreniumC(newVlaue: boolean) {
+    console.log("PreniumProtectionService - setIsPreniumC")
     this.currentValue = newVlaue;
   }
 }
