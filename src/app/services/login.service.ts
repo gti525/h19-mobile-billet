@@ -17,6 +17,8 @@ export class LoginService {
     
     private isUserPrenium : boolean = false;
 
+    private attenteAlert;
+
     constructor(
         private http: HttpClient, 
         private storage: Storage, 
@@ -27,13 +29,14 @@ export class LoginService {
         private alertController: AlertController) { }
 
     login(username, password) {
-
+        this.afficherVeuillezPatienter()
         console.log(username + " " + password);
         this.http.post('https://core-api-525.herokuapp.com/api/client/login', {
             "email": username,
             "password": password
         })
             .subscribe(data => {
+                this.enleverVeuillezPatienter()
                 data["Password"] = password;
                 console.log(data);
                 console.log("prenium? "+data["IsPremium"]);
@@ -49,6 +52,7 @@ export class LoginService {
                     })
                     .catch(err => console.log(err));
             }, error => {
+                this.enleverVeuillezPatienter()
                 var messageRecu = "Erreur de connection : "+error.status+" <ul><li>errerur : "+error["error"]+"</li><ul>"
                 this.afficherErreurConnection(messageRecu, "Reseau social (/login)")
                 console.log('Adresse Email ou mot de passe invalide');
@@ -93,4 +97,20 @@ export class LoginService {
     getUserInfo(){
         return this.storage.get(this.USER_INFO);
     }
+
+    async afficherVeuillezPatienter(){
+        console.log("afficherVeuillezPatienter")
+        const alert = await this.alertController.create({
+          header: 'En cours de traitement',
+          backdropDismiss: false,
+          message: 'Veuillez patienter'
+        });
+        this.attenteAlert = alert
+        return await this.attenteAlert.present();
+      }
+
+      enleverVeuillezPatienter(){
+        console.log("enleverVeuillezPatienter")
+        this.attenteAlert.dismiss();
+      }
 }
