@@ -144,7 +144,6 @@ export class PasserelleService {
     async afficherConfirmation(){
       console.log("afficherConfirmation")
       // todo
-      this.preniumProtectionService.setIsPreniumC(true)
       const alert = await this.alertController.create({
         header: 'Confirmation',
         backdropDismiss: false,
