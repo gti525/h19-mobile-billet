@@ -19,6 +19,7 @@ export class UserTicketsPage implements OnInit {
     private ticketList: any;
     private show: boolean;
     private timestamp: any;
+    private isPremiumFromService: boolean
 
     constructor( 
         private ticketService: TicketsService, 
@@ -28,13 +29,8 @@ export class UserTicketsPage implements OnInit {
         private settingService: SettingService,
         private preniumProtectionService: PreniumProtectionService
         ) { 
-            this.preniumProtectionService.getCurrentValue();
-            loginService.getUserInfo().then(info => {
-                console.log("UserTicketsPage (getUserInfo) "+info.IsPremium)
-            })
-            .catch(() => {
-            });
-            console.log("UserTicketsPage (constructor) - the user is prenium? "+this.preniumProtectionService.getCurrentValue()+" "+this.preniumProtectionService.getCurrentValue())
+            this.isPremiumFromService = this.preniumProtectionService.getCurrentValue();
+            console.log("UserTicketsPage (constructor) - the user is prenium? "+this.preniumProtectionService.getCurrentValue()+" "+this.isPremiumFromService)
         }
 
     ngOnInit() {
@@ -51,7 +47,7 @@ export class UserTicketsPage implements OnInit {
 
             this.setTimestamp();
 
-            console.log("UserTicketsPage (ngOnInit) - the user is prenium? "+this.preniumProtectionService.getCurrentValue())
+            console.log("UserTicketsPage (ngOnInit) - the user is prenium? "+this.isPremiumFromService)
     }
 
     async getTickets () {

@@ -19,6 +19,6 @@ export class PreniumProtectionService {
 
   getCurrentValue(): boolean{
     console.log("PreniumProtectionService - getCurrentValue "+this.loginService.getIsUserPrenium())
-    return !this.loginService.getIsUserPrenium();
+    return this.loginService.getIsUserPrenium();
   }
 }
