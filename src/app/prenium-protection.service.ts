@@ -7,11 +7,21 @@ import { LoginService } from './services/login.service';
 })
 export class PreniumProtectionService {
 
-  constructor(private loginService: LoginService) { }
+  currentValue: boolean;
+
+  constructor() {
+  }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean{
     //on retourne seulement true si l'utilisateur est prenium
-    var newvalue = this.loginService.getIsUserPrenium()
-    return !newvalue;
+    return !this.currentValue;
+  }
+
+  getCurrentValue(): boolean{
+    return !this.currentValue;
+  }
+
+  setIsPreniumC(newVlaue: boolean) {
+    this.currentValue = newVlaue;
   }
 }

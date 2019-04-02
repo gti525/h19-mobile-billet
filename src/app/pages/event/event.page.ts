@@ -3,6 +3,7 @@ import { EventService } from 'src/app/services/event.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoginService } from 'src/app/services/login.service';
 import { SettingService } from 'src/app/services/setting.service';
+import { PreniumProtectionService } from 'src/app/prenium-protection.service';
 
 
 @Component({
@@ -13,13 +14,16 @@ import { SettingService } from 'src/app/services/setting.service';
 export class EventPage implements OnInit {
 
     friendList: any;
+    private isPremiumFromService: boolean
 
     constructor( 
         private eventService: EventService, 
         private loginService: LoginService, 
         private http: HttpClient,
-        private settingService: SettingService
-        ) { }
+        private PreniumProtectionService: PreniumProtectionService) {
+            this.isPremiumFromService = PreniumProtectionService.getCurrentValue();
+            console.log("EventPage - the user is prenium? "+this.isPremiumFromService)
+         }
 
     ngOnInit() {
         this.getFriends();

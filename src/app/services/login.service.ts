@@ -6,6 +6,7 @@ import { TicketsService } from './tickets.service';
 import { EventService } from './event.service';
 import { SettingService } from './setting.service';
 import {AlertController} from '@ionic/angular';
+import { PreniumProtectionService } from '../prenium-protection.service';
 
 @Injectable({
     providedIn: 'root'
@@ -24,7 +25,8 @@ export class LoginService {
         private ticketService: TicketsService, 
         private eventService: EventService,
         private settingService: SettingService,
-        private alertController: AlertController
+        private alertController: AlertController,
+        private preniumProtectionService: PreniumProtectionService
         ) { }
 
     login(username, password) {
@@ -38,6 +40,7 @@ export class LoginService {
                 data["Password"] = password;
                 console.log(data);
                 console.log("prenium? "+data["IsPremium"]);
+                this.preniumProtectionService
                 this.settingService.setInfo(data);
                 console.log(this.settingService.getInfo());
                 this.isUserLoggedIn = true;
