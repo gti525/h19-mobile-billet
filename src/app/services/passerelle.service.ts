@@ -5,6 +5,7 @@ import { LoginService } from 'src/app/services/login.service';
 import { SettingService } from 'src/app/services/setting.service';
 import { Router } from '@angular/router';
 import {AlertController} from '@ionic/angular';
+import { PreniumProtectionService } from '../prenium-protection.service';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +34,8 @@ export class PasserelleService {
     private loginService: LoginService, 
     private settingService: SettingService, 
     private router: Router, 
-    private alertController: AlertController) {
+    private alertController: AlertController,
+    private preniumProtectionService: PreniumProtectionService) {
   }
 
   paiementPreniumEtape1(prenomCC, nomCC, numeroCC, cvvCC, moisExpCC, anneeExpCC) {
@@ -116,7 +118,6 @@ export class PasserelleService {
               this.resultatEtape3 = "Etape 3 (erreur) : "+error["status"]+", erreur : "+error["error"]+", details : "+error["headers"]
               console.log(JSON.stringify(error))
               console.log(this.resultatEtape3)
-              this.settingService.setPremium(true);
             }, data => {
               this.enleverVeuillezPatienter()
               console.log("ca marche")
@@ -124,14 +125,12 @@ export class PasserelleService {
               this.resultatEtape3 = "Etape 3 : "+messageRecu
               if(messageRecu.endsWith("True")){
                 console.log("The message ends with true, so the user is now prenium")
-                this.settingService.setPremium(true);
                 // todo : desactiver la possiblite de desactiver les pubs
                 this.loginService.setIsUserPrenium(true)
                 this.afficherConfirmation()
               } else {
                 // todo : essayer de faire en sorte que lutilisateur ne puisse pas revenir a un compte normale sil y est deja prenium
                 //console.log("Error : the meesage received from the api didnt end with true (in this case it ended with false)")
-                this.settingService.setPremium(false);
                 this.afficherFeedback(this.resultatEtape3, "Reseau social (/changePremiumState)");
               }
               console.log(JSON.stringify(data))
@@ -144,6 +143,8 @@ export class PasserelleService {
 
     async afficherConfirmation(){
       console.log("afficherConfirmation")
+      // todo
+      this.preniumProtectionService.setIsPreniumC(true)
       const alert = await this.alertController.create({
         header: 'Confirmation',
         backdropDismiss: false,
