@@ -11,6 +11,11 @@
         <ad></ad>
     </section>
 
+    <ion-button (click)="ngOnInit()">
+        Refresh
+    </ion-button>
+    <ion-item>Last refresh : {{timestamp}}</ion-item>
+
     <ion-list *ngFor="let friend of friendList">
         <ion-item lines="none">
             <ion-label text wrap>

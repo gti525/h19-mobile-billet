@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoginService } from 'src/app/services/login.service';
 import { SettingService } from 'src/app/services/setting.service';
 import { PreniumProtectionService } from 'src/app/prenium-protection.service';
+import * as moment from 'moment';
 
 
 @Component({
@@ -14,7 +15,8 @@ import { PreniumProtectionService } from 'src/app/prenium-protection.service';
 export class EventPage implements OnInit {
 
     friendList: any;
-    private isPremiumFromService: boolean
+    private isPremiumFromService: boolean;
+    private timestamp: any;
 
     constructor( 
         private eventService: EventService, 
@@ -35,6 +37,8 @@ export class EventPage implements OnInit {
                 else this.getFriends();
             })
             .catch(() => this.getFriends());
+
+            this.setTimestamp();
     }
 
     async getFriends () {
@@ -57,4 +61,7 @@ export class EventPage implements OnInit {
             })
     }
 
+    setTimestamp () {
+        this.timestamp = moment().format("DD-MM hh:mm");
+    }
 }

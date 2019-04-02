@@ -18,6 +18,7 @@ export class UserTicketsPage implements OnInit {
 
     private ticketList: any;
     private show: boolean;
+    private timestamp: any;
 
     constructor( 
         private ticketService: TicketsService, 
@@ -47,6 +48,8 @@ export class UserTicketsPage implements OnInit {
                 else { this.getTickets() }
             })
             .catch(() => this.getTickets());
+
+            this.setTimestamp();
 
             console.log("UserTicketsPage (ngOnInit) - the user is prenium? "+this.preniumProtectionService.getCurrentValue())
     }
@@ -90,6 +93,10 @@ export class UserTicketsPage implements OnInit {
 
     setTicketList (ticketList) {
         this.ticketList = ticketList;
+    }
+
+    setTimestamp () {
+        this.timestamp = moment().format("DD-MM hh:mm");
     }
 
 }

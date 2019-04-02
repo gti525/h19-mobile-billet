@@ -20,6 +20,7 @@
     <ion-button (click)="ngOnInit()">
         Refresh
     </ion-button>
+    <ion-item>Last refresh : {{timestamp}}</ion-item>
 
     <div *ngIf="show; else elseBlock">
         <ion-list *ngFor="let ticket of ticketList">
