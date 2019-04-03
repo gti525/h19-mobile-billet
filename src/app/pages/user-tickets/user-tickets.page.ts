@@ -30,8 +30,14 @@ export class UserTicketsPage implements OnInit {
         private preniumProtectionService: PreniumProtectionService
         ) { 
             this.isPremiumFromService = this.preniumProtectionService.getCurrentValue();
-            console.log("UserTicketsPage (constructor) - the user is prenium? "+this.preniumProtectionService.getCurrentValue()+" "+this.isPremiumFromService)
+            console.log("UserTicketsPage (constructor) - the user is prenium? "+
+            this.preniumProtectionService.getCurrentValue()+" "+this.isPremiumFromService)
         }
+
+    ionViewWillEnter(){
+        this.isPremiumFromService = this.preniumProtectionService.getCurrentValue();
+        console.log("UserTicketsPage - ionViewWillEnter")
+    }
 
     ngOnInit() {
         // make api GET Ticket if there is no ticket in local storage

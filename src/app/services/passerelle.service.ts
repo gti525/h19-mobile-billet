@@ -74,7 +74,7 @@ export class PasserelleService {
   //ne marche pas encore, il faut attendre l'equipe de passerelle
   paiementPreniumEtape2(numeroTransaction: String) {
     // pas oublige de mettre le content-type?
-    console.log("paiementPreniumEtape2")
+    console.log("paiementPreniumEtape2 "+numeroTransaction)
     this.afficherVeuillezPatienter()
     this.http.post(this.API_URL_PASSERELLE+this.API_POST_REQUEST_PASSERELLE_PROCESS, {
       "transaction_number": numeroTransaction+"",
@@ -144,6 +144,7 @@ export class PasserelleService {
     async afficherConfirmation(){
       console.log("afficherConfirmation")
       // todo
+      this.loginService.setIsUserPrenium(true)
       const alert = await this.alertController.create({
         header: 'Confirmation',
         backdropDismiss: false,
