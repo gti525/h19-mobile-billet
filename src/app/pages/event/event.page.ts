@@ -22,8 +22,8 @@ export class EventPage implements OnInit {
         private eventService: EventService, 
         private loginService: LoginService, 
         private http: HttpClient,
-        private PreniumProtectionService: PreniumProtectionService) {
-            this.isPremiumFromService = PreniumProtectionService.getCurrentValue();
+        private preniumProtectionService: PreniumProtectionService) {
+            this.isPremiumFromService = this.preniumProtectionService.getCurrentValue();
             console.log("EventPage - the user is prenium? "+this.isPremiumFromService)
          }
 

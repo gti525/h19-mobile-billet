@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 import { SettingService } from 'src/app/services/setting.service';
+import { PreniumProtectionService } from 'src/app/prenium-protection.service';
 
 @Component({
     selector: 'app-parametres',
@@ -11,12 +12,16 @@ import { SettingService } from 'src/app/services/setting.service';
 export class ParametresPage implements OnInit {
 
     userName: String;
+    private isPremiumFromService: boolean
 
     constructor(
         private router: Router, 
         private loginService: LoginService,
-        private settingService: SettingService
-        ) { }
+        private settingService: SettingService,
+        private preniumProtectionService: PreniumProtectionService
+        ) { 
+            this.isPremiumFromService = this.preniumProtectionService.getCurrentValue();
+        }
 
     async ngOnInit() {
         let info = await this.loginService.getUserInfo();
