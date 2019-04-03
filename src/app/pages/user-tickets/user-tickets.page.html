@@ -18,9 +18,9 @@
         <ad></ad>
     </section>
     <ion-button (click)="ngOnInit()">
-        Refresh
+        Rafraichissement
     </ion-button>
-    <ion-item>Last refresh : {{timestamp}}</ion-item>
+    <ion-item>Dernier Rafraichissement: {{timestamp}}</ion-item>
 
     <div *ngIf="show; else elseBlock">
         <ion-list *ngFor="let ticket of ticketList">
