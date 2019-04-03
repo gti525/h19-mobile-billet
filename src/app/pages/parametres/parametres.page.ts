@@ -28,6 +28,11 @@ export class ParametresPage implements OnInit {
         this.userName = info.FirstName + " " + info.LastName;
     }
 
+    ionViewWillEnter(){
+        this.isPremiumFromService = this.preniumProtectionService.getCurrentValue();
+        console.log("ParametresPage - ionViewWillEnter")
+    }
+
     clickReturnLogin() {
         this.loginService.deleteUserInfo()
             .then(() => {
