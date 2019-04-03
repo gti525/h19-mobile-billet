@@ -63,6 +63,10 @@ export class PasserelleService {
           this.enleverVeuillezPatienter()
           this.resultatEtape1 = "Etape 1 : "+data["result"]+", numero de transaction : "+data["transaction_number"]
           console.log("resultat etape 1 "+this.resultatEtape1)
+          if(data["transaction_number"] == null){
+            this.afficherFeedback(this.resultatEtape1, "Passerelle (/create)");
+            return
+          }
           this.paiementPreniumEtape2(data["transaction_number"])
       }, error => {
         this.enleverVeuillezPatienter()
@@ -126,7 +130,6 @@ export class PasserelleService {
               if(messageRecu.endsWith("True")){
                 console.log("The message ends with true, so the user is now prenium")
                 // todo : desactiver la possiblite de desactiver les pubs
-                this.loginService.setIsUserPrenium(true)
                 this.afficherConfirmation()
               } else {
                 // todo : essayer de faire en sorte que lutilisateur ne puisse pas revenir a un compte normale sil y est deja prenium
@@ -144,6 +147,8 @@ export class PasserelleService {
     async afficherConfirmation(){
       console.log("afficherConfirmation")
       // todo
+      // ca ne met pas a jour automatiquement les pages...
+      // on pourrait forcer lutilisateur a se reconnecter?
       this.loginService.setIsUserPrenium(true)
       const alert = await this.alertController.create({
         header: 'Confirmation',
