@@ -33,9 +33,8 @@ export class TicketPage implements OnInit {
         this.Artist = Artist;
     }
 
-    //on devrait garder ca?
-    // clickReturn () {
-    //     this.router.navigateByUrl('/tabs');
-    // }
+    clickReturn () {
+         this.router.navigateByUrl('/tabs');
+     }
 
 }

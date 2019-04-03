@@ -22,7 +22,7 @@ export class LoginPage implements OnInit {
     async presentAlert() {
         const alert = await this.alertController.create({
             header: 'Première connection',
-            subHeader: 'Veuillez entrer vos informations de connection',
+            subHeader: 'Veuillez entrer vos informations de connexion',
             inputs: [
                 {
                     name: 'email',
