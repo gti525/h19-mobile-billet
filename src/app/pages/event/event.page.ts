@@ -27,6 +27,11 @@ export class EventPage implements OnInit {
             console.log("EventPage - the user is prenium? "+this.isPremiumFromService)
          }
 
+    ionViewWillEnter(){
+        this.isPremiumFromService = this.preniumProtectionService.getCurrentValue();
+        console.log("EventPage - ionViewWillEnter")
+    }
+
     ngOnInit() {
         this.getFriends();
         this.eventService.getFriends()
