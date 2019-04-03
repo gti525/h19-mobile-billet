@@ -3,6 +3,8 @@ import { EventService } from 'src/app/services/event.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoginService } from 'src/app/services/login.service';
 import { SettingService } from 'src/app/services/setting.service';
+import { PreniumProtectionService } from 'src/app/prenium-protection.service';
+import * as moment from 'moment';
 
 
 @Component({
@@ -13,17 +15,19 @@ import { SettingService } from 'src/app/services/setting.service';
 export class EventPage implements OnInit {
 
     friendList: any;
-    private isPremium: boolean;
+    private isPremiumFromService: boolean;
+    private timestamp: any;
 
     constructor( 
         private eventService: EventService, 
         private loginService: LoginService, 
         private http: HttpClient,
-        private settingService: SettingService
-        ) { }
+        private preniumProtectionService: PreniumProtectionService) {
+            this.isPremiumFromService = this.preniumProtectionService.getCurrentValue();
+            console.log("EventPage - the user is prenium? "+this.isPremiumFromService)
+         }
 
     ngOnInit() {
-        this.isPremium = this.settingService.getPremium();
         this.getFriends();
         this.eventService.getFriends()
             .then(value => {
@@ -33,60 +37,8 @@ export class EventPage implements OnInit {
                 else this.getFriends();
             })
             .catch(() => this.getFriends());
-        // this.friendList = [
-        //     {
-        //         ClientId: 1,
-        //         FirstName: "Bob",
-        //         Tickets: [
-        //             {
-        //                 "Id": 45,
-        //                 "UUID": 54677,
-        //                 "EventName": "ROUGE",
-        //                 "Artist": "Barbe bleue",
-        //                 "Date": "2019-05-25T00:00:00",
-        //                 "Location": "Mtl",
-        //                 "ClientId": 0,
-        //                 "Client": null
-        //             },
-        //             {
-        //                 "Id": 46,
-        //                 "UUID": 65744,
-        //                 "EventName": "BLEU",
-        //                 "Artist": "Barbe bleue",
-        //                 "Date": "2019-05-25T00:00:00",
-        //                 "Location": "Mtl",
-        //                 "ClientId": 0,
-        //                 "Client": null
-        //             }
-        //         ]
-        //     },
-        //     {
-        //         ClientId: 2,
-        //         FirstName: "Alice",
-        //         Tickets: [
-        //             {
-        //                 "Id": 45,
-        //                 "UUID": 54677,
-        //                 "EventName": "ORANGE",
-        //                 "Artist": "Barbe bleue",
-        //                 "Date": "2019-05-25T00:00:00",
-        //                 "Location": "Mtl",
-        //                 "ClientId": 0,
-        //                 "Client": null
-        //             },
-        //             {
-        //                 "Id": 46,
-        //                 "UUID": 65744,
-        //                 "EventName": "VIOLET",
-        //                 "Artist": "Barbe bleue",
-        //                 "Date": "2019-05-25T00:00:00",
-        //                 "Location": "Mtl",
-        //                 "ClientId": 0,
-        //                 "Client": null
-        //             }
-        //         ]
-        //     }
-        // ]
+
+            this.setTimestamp();
     }
 
     async getFriends () {
@@ -109,4 +61,7 @@ export class EventPage implements OnInit {
             })
     }
 
+    setTimestamp () {
+        this.timestamp = moment().format("DD-MM hh:mm");
+    }
 }

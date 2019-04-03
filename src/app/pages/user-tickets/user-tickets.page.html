@@ -12,14 +12,15 @@
 
 </ion-header>
 
-<ion-content>
+<ion-content cache-view="false">
 
-    <section *ngIf="!isPremium">
+    <section *ngIf="!isPremiumFromService">
         <ad></ad>
     </section>
     <ion-button (click)="ngOnInit()">
         Refresh
     </ion-button>
+    <ion-item>Last refresh : {{timestamp}}</ion-item>
 
     <div *ngIf="show; else elseBlock">
         <ion-list *ngFor="let ticket of ticketList">

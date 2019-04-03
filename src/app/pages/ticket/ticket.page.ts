@@ -16,7 +16,13 @@ export class TicketPage implements OnInit {
     private EventName: string;
     private Location: string;
 
-    constructor (private ticketsService: TicketsService, private router: Router) { }
+    constructor (private ticketsService: TicketsService, 
+        private router: Router) {
+    }
+
+    ngOnChanges(){
+        console.log("TicketPage - ngOnChanges")
+    }
 
     ngOnInit() {
         const {UUID, Date, EventName, Location, Artist} = this.ticketsService.currentTicket;
@@ -27,8 +33,9 @@ export class TicketPage implements OnInit {
         this.Artist = Artist;
     }
 
-    clickReturn () {
-        this.router.navigateByUrl('/tabs');
-    }
+    //on devrait garder ca?
+    // clickReturn () {
+    //     this.router.navigateByUrl('/tabs');
+    // }
 
 }

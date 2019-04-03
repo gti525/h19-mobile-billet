@@ -6,6 +6,7 @@ import _ from 'lodash';
 import { LoginService } from '../../services/login.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SettingService } from 'src/app/services/setting.service';
+import { PreniumProtectionService } from 'src/app/prenium-protection.service';
 //import { Ad } from '../../module/Ad';
 
 @Component({
@@ -17,19 +18,23 @@ export class UserTicketsPage implements OnInit {
 
     private ticketList: any;
     private show: boolean;
-    private isPremium: boolean;
+    private timestamp: any;
+    private isPremiumFromService: boolean
 
     constructor( 
         private ticketService: TicketsService, 
         private router: Router, 
         private loginService: LoginService, 
         private http: HttpClient,
-        private settingService: SettingService
-        ) { }
+        private settingService: SettingService,
+        private preniumProtectionService: PreniumProtectionService
+        ) { 
+            this.isPremiumFromService = this.preniumProtectionService.getCurrentValue();
+            console.log("UserTicketsPage (constructor) - the user is prenium? "+this.preniumProtectionService.getCurrentValue()+" "+this.isPremiumFromService)
+        }
 
     ngOnInit() {
         // make api GET Ticket if there is no ticket in local storage
-        this.isPremium = this.settingService.getPremium();
         this.ticketService.getTickets()
             .then(value => { 
                 if (value.length !== 0) {
@@ -39,6 +44,10 @@ export class UserTicketsPage implements OnInit {
                 else { this.getTickets() }
             })
             .catch(() => this.getTickets());
+
+            this.setTimestamp();
+
+            console.log("UserTicketsPage (ngOnInit) - the user is prenium? "+this.isPremiumFromService)
     }
 
     async getTickets () {
@@ -80,6 +89,10 @@ export class UserTicketsPage implements OnInit {
 
     setTicketList (ticketList) {
         this.ticketList = ticketList;
+    }
+
+    setTimestamp () {
+        this.timestamp = moment().format("DD-MM hh:mm");
     }
 
 }

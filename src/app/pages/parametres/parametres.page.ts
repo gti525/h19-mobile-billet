@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 import { SettingService } from 'src/app/services/setting.service';
+import { PreniumProtectionService } from 'src/app/prenium-protection.service';
 
 @Component({
     selector: 'app-parametres',
@@ -11,17 +12,18 @@ import { SettingService } from 'src/app/services/setting.service';
 export class ParametresPage implements OnInit {
 
     userName: String;
-    isPremium: boolean;
+    private isPremiumFromService: boolean
 
     constructor(
         private router: Router, 
         private loginService: LoginService,
-        private settingService: SettingService
-        ) { }
+        private settingService: SettingService,
+        private preniumProtectionService: PreniumProtectionService
+        ) { 
+            this.isPremiumFromService = this.preniumProtectionService.getCurrentValue();
+        }
 
     async ngOnInit() {
-        this.isPremium = this.settingService.getPremium();
-        console.log(this.isPremium);
         let info = await this.loginService.getUserInfo();
         this.userName = info.FirstName + " " + info.LastName;
     }
@@ -39,9 +41,5 @@ export class ParametresPage implements OnInit {
     removeAdsClickHandler() {
         console.log("removeAdsClickHandler")
         this.router.navigateByUrl('paiement');
-    }
-
-    setPremium(){
-        this.settingService.setPremium(!this.isPremium);
     }
 }
