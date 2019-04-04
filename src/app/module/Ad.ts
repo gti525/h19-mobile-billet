@@ -17,12 +17,13 @@ export class Ad implements OnInit {
     public redirectUrl;
     private clientStatisticId;
     private clientInfos: any = {};
-
+    
     constructor(private router: Router, private geolocation: Geolocation,private http: HttpClient) {
         this.storageKey = "gti525analytic";
     }
-
-    async ngOnInit() {
+    
+    ngOnInit(): void {}
+    async ngAfterViewInit() {
         this.clientId = this.getClientId();
         if (!this.clientId) {
             await this.getClientInfos();
@@ -70,8 +71,13 @@ export class Ad implements OnInit {
     }
 
     private async getLocalisationInfo(): Promise<string> {
-        const resp = await this.geolocation.getCurrentPosition();
-        return resp.coords.latitude + 'X' + resp.coords.longitude;
+        try  {
+            const resp = await this.geolocation.getCurrentPosition();
+            return resp.coords.latitude + 'X' + resp.coords.longitude;
+        }
+        catch {
+            return "45.510905099999995X-73.5676296";
+        }
     }
 
     private async getClientInfos() {
