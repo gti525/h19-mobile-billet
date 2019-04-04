@@ -15,9 +15,15 @@ h2
 }
 
 section {
-    border: 2px solid black;
+    border: 2px solid blue;
     text-align: center;
     padding: 5%;
+}
+
+section ad {
+    display: block;
+    height: 50px;
+    overflow: hidden;
 }
 
 ion-content {
