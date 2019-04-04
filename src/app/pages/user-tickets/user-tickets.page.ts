@@ -17,7 +17,6 @@ import { PreniumProtectionService } from 'src/app/prenium-protection.service';
 export class UserTicketsPage implements OnInit {
 
     private ticketList: any;
-    private show: boolean;
     private timestamp: any;
     private isPremiumFromService: boolean
 
@@ -26,7 +25,6 @@ export class UserTicketsPage implements OnInit {
         private router: Router, 
         private loginService: LoginService, 
         private http: HttpClient,
-        private settingService: SettingService,
         private preniumProtectionService: PreniumProtectionService
         ) { 
             this.isPremiumFromService = this.preniumProtectionService.getCurrentValue();
@@ -41,16 +39,16 @@ export class UserTicketsPage implements OnInit {
 
     ngOnInit() {
         // make api GET Ticket if there is no ticket in local storage
-        this.ticketService.getTickets()
-            .then(value => { 
-                if (value.length !== 0) {
-                    this.show = true;
-                    this.ticketList = value 
-                }
-                else { this.getTickets() }
-            })
-            .catch(() => this.getTickets());
-
+        this.getTickets()
+            .then(() => console.log('ok'))
+            .catch(() => {
+                this.ticketService.getTickets()
+                    .then(value => {
+                        if(value) this.setTicketList(value);
+                    })
+                    .catch(() => console.log('error reaching local storage'))
+            });
+    
             this.setTimestamp();
 
             console.log("UserTicketsPage (ngOnInit) - the user is prenium? "+this.isPremiumFromService)

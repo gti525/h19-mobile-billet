@@ -18,7 +18,7 @@ export class LoginService {
     
     private isUserPrenium : boolean = false;
 
-    private attenteAlert;
+    private attenteAlert : any;
 
     constructor(
         private http: HttpClient, 
@@ -29,8 +29,8 @@ export class LoginService {
         private settingService: SettingService,
         private alertController: AlertController) { }
 
-    login(username, password) {
-        this.afficherVeuillezPatienter()
+    async login(username, password) {
+        await this.afficherVeuillezPatienter();
         console.log(username + " " + password);
         this.http.post('https://core-api-525.herokuapp.com/api/client/login', {
             "email": username,

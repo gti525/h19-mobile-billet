@@ -22,7 +22,7 @@
     </ion-button>
     <ion-item>Dernier Rafraichîssement : {{timestamp}}</ion-item>
 
-    <div *ngIf="show; else elseBlock">
+    <div>
         <ion-list *ngFor="let ticket of ticketList">
         
             <ion-item lines="none">
@@ -41,8 +41,4 @@
         </ion-list>
     </div>
     
-    <ng-template #elseBlock>
-        Aucun billet trouvé !
-    </ng-template>
-
 </ion-content>

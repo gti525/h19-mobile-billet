@@ -33,15 +33,18 @@ export class EventPage implements OnInit {
     }
 
     ngOnInit() {
-        this.getFriends();
-        this.eventService.getFriends()
-            .then(value => {
-                if (value) {
-                    this.friendList = value;
-                }
-                else this.getFriends();
-            })
-            .catch(() => this.getFriends());
+        this.getFriends()
+            .then(() => console.log('ok'))
+            .catch(() => {
+                this.eventService.getFriends()
+                    .then(value => {
+                        if (value) {
+                            this.setFriendList(value);
+                        }
+                    })
+                    .catch(() => console.log('error reaching local storage'))
+            });
+        
 
             this.setTimestamp();
     }
@@ -64,6 +67,10 @@ export class EventPage implements OnInit {
                 console.log("could not get friends");
                 console.log(error);
             })
+    }
+
+    setFriendList(list) {
+        this.friendList = list;
     }
 
     setTimestamp () {
